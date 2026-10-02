@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        [data-composition-id="m06"] .bg { background: radial-gradient(ellipse at 50% 40%, #ffffff 0%, var(--cream) 60%, #efe7dc 100%); }
+        [data-composition-id="m06"] .pass { position: absolute; left: 460px; top: 200px; width: 1000px; height: 440px; border-radius: 28px; background: #fff; box-shadow: 0 40px 90px rgba(22, 19, 32, 0.18); display: grid; grid-template-columns: 1fr 250px; overflow: hidden; }
+        [data-composition-id="m06"] .main { padding: 40px 48px; position: relative; }
+        [data-composition-id="m06"] .stub { background: var(--red-deep); color: #fff; padding: 40px 30px; position: relative; }
+        [data-composition-id="m06"] .stub::before { content: ""; position: absolute; left: -2px; top: 20px; bottom: 20px; border-left: 4px dashed rgba(255, 255, 255, 0.6); }
+        [data-composition-id="m06"] .ph { display: flex; justify-content: space-between; font-size: 22px; font-weight: 700; letter-spacing: 0.18em; color: var(--muted); }
+        [data-composition-id="m06"] .ph .jp { letter-spacing: 0.1em; color: var(--red-deep); }
+        [data-composition-id="m06"] .od { display: flex; align-items: center; gap: 40px; margin-top: 34px; }
+        [data-composition-id="m06"] .od b { display: block; font-size: 120px; font-weight: 800; letter-spacing: -0.02em; line-height: 1; color: var(--ink); }
+        [data-composition-id="m06"] .od span { display: block; font-size: 26px; font-weight: 600; color: var(--muted); margin-top: 8px; }
+        [data-composition-id="m06"] .od .air { font-size: 60px; color: var(--sand); }
+        [data-composition-id="m06"] .meta { display: flex; gap: 46px; margin-top: 40px; }
+        [data-composition-id="m06"] .meta div { font-size: 20px; font-weight: 700; color: var(--muted); letter-spacing: 0.12em; }
+        [data-composition-id="m06"] .meta b { display: block; font-size: 38px; color: var(--ink); letter-spacing: 0; margin-top: 4px; }
+        [data-composition-id="m06"] .stub .lbl { font-size: 18px; font-weight: 700; letter-spacing: 0.16em; opacity: 0.85; }
+        [data-composition-id="m06"] .stub b { display: block; font-size: 44px; font-weight: 800; margin: 4px 0 22px; }
+        [data-composition-id="m06"] .bars { position: absolute; left: 30px; right: 30px; bottom: 34px; height: 70px; background: repeating-linear-gradient(90deg, #fff 0 3px, transparent 3px 7px, #fff 7px 8px, transparent 8px 13px); opacity: 0.9; }
+        [data-composition-id="m06"] .lang { position: absolute; left: 980px; top: 170px; width: 840px; text-align: center; }
+        [data-composition-id="m06"] .lang .big { font-size: 240px; color: var(--navy); letter-spacing: 0.04em; display: inline-flex; }
+        [data-composition-id="m06"] .lang .big span { display: inline-block; }
+        [data-composition-id="m06"] .lang .read { margin-top: 56px; font-family: var(--jp-sans); font-weight: 700; font-size: 40px; color: var(--red); letter-spacing: 0.3em; }
+        [data-composition-id="m06"] .word { position: absolute; padding: 14px 24px; border-radius: 16px; background: #fff; box-shadow: 0 14px 30px rgba(22, 19, 32, 0.1); font-size: 26px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+        [data-composition-id="m06"] .word .kanji { font-size: 44px; color: var(--ink); margin-right: 12px; }
+      </style>
+      <div id="root" data-composition-id="m06" data-width="1920" data-height="1080" data-duration="6">
+        <div class="layer bg"></div>
+        <div class="pass" id="m06-pass">
+          <div class="main">
+            <div class="ph"><span>BOARDING PASS</span><span class="jp">搭乗券</span></div>
+            <div class="od">
+              <div><b>DAC</b><span>Dhaka</span></div>
+              <div class="air"><svg viewBox="-34 -34 68 68" width="84" height="84"><path d="M30 0 L8 -4 L-6 -26 L-12 -26 L-4 -4 L-18 -3 L-24 -11 L-29 -11 L-25 0 L-29 11 L-24 11 L-18 3 L-4 4 L-12 26 L-6 26 L8 4 Z" fill="#f4a261" /></svg></div>
+              <div><b>TYO</b><span>Tokyo</span></div>
+            </div>
+            <div class="meta"><div>FLIGHT<b>101</b></div><div>GATE<b>7</b></div><div>SEAT<b>24A</b></div><div>BOARDS<b>13:05</b></div></div>
+          </div>
+          <div class="stub"><div class="lbl">PASSENGER</div><b>You</b><div class="lbl">CLASS</div><b>Y</b><div class="bars"></div></div>
+        </div>
+        <div class="lang" id="m06-lang">
+          <div class="big kanji"><span class="m06-ch">日</span><span class="m06-ch">本</span><span class="m06-ch">語</span></div>
+          <div class="read" id="m06-read">にほんご</div>
+        </div>
+        <div class="word m06-w" style="left: 1010px; top: 640px"><span class="kanji">住む</span>to live</div>
+        <div class="word m06-w" style="left: 1290px; top: 690px"><span class="kanji">働く</span>to work</div>
+        <div class="word m06-w" style="left: 1560px; top: 630px"><span class="kanji">学ぶ</span>to study</div>
+      </div>
+      <script>
+        (function () {
+          const T0 = 38.6;
+          const S = '[data-composition-id="m06"] ';
+          const $ = (s) => document.querySelector(S + s);
+          const tl = gsap.timeline({ paused: true });
+          const tJapan = JS.word("L13", "Japan").s - T0;
+          const tLang = JS.word("L14", "language").s - T0;
+          const tLive = JS.word("L14", "live").s - T0;
+          tl.set([$("#m06-lang"), $("#m06-read")], { opacity: 0 }, 0);
+          tl.set(S + ".m06-w", { opacity: 0 }, 0);
+          tl.fromTo($("#m06-pass"), { y: 140, rotation: -6, opacity: 0 }, { y: 0, rotation: -2, opacity: 1, duration: 0.6, ease: "power3.out" }, 0.05);
+          tl.fromTo(S + ".air", { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: "power2.out" }, tJapan - 0.3);
+          tl.to($("#m06-pass"), { rotation: 0, y: -8, duration: 1.4, ease: "sine.inOut" }, 0.65);
+          // the language
+          tl.to($("#m06-pass"), { x: -420, y: 40, scale: 0.6, rotation: -4, duration: 0.6, ease: "power3.inOut" }, tLang - 0.45);
+          tl.set($("#m06-lang"), { opacity: 1 }, tLang - 0.2);
+          gsap.utils.toArray(S + ".m06-ch").forEach((c, i) => tl.fromTo(c, { opacity: 0, y: 60, filter: "blur(12px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.45, ease: "power3.out" }, tLang - 0.2 + i * 0.12));
+          tl.fromTo($("#m06-read"), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, tLang + 0.3);
+          gsap.utils.toArray(S + ".m06-w").forEach((w, i) => tl.fromTo(w, { opacity: 0, y: 20, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(2)" }, tLive - 0.25 + i * 0.12));
+          tl.to([$("#m06-lang"), $("#m06-pass"), S + ".m06-w"], { opacity: 0, duration: 0.3 }, 5.65);
+          window.__timelines["m06"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

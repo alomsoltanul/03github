@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; background: #0e1a30; }
+        [data-composition-id="m02"] svg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+        [data-composition-id="m02"] .card { position: absolute; padding: 18px 26px 18px 22px; display: flex; align-items: center; gap: 18px; white-space: nowrap; }
+        [data-composition-id="m02"] .card .kanji { font-size: 72px; color: var(--sand); }
+        [data-composition-id="m02"] .card b { display: block; font-size: 34px; font-weight: 700; }
+        [data-composition-id="m02"] .card span { display: block; font-family: var(--jp-sans); font-weight: 700; font-size: 22px; color: var(--teal-hi); margin-top: 4px; }
+        [data-composition-id="m02"] .vignette { background: radial-gradient(ellipse 75% 70% at 50% 45%, rgba(11, 18, 32, 0) 50%, rgba(11, 18, 32, 0.75) 100%); }
+      </style>
+      <div id="root" data-composition-id="m02" data-width="1920" data-height="1080" data-duration="6.55">
+        <svg id="m02-svg" viewBox="0 0 1920 1080"></svg>
+        <div class="layer vignette"></div>
+        <div class="pin" id="m02-p1" style="color: var(--sand)"><div class="ring"></div><div class="dot" style="background: var(--sand)"></div></div>
+        <div class="pin" id="m02-p2" style="color: var(--sand)"><div class="ring"></div><div class="dot" style="background: var(--sand)"></div></div>
+        <div class="pin" id="m02-p3" style="color: var(--sand)"><div class="ring"></div><div class="dot" style="background: var(--sand)"></div></div>
+        <div class="card glass" id="m02-c1"><div class="kanji">仕事</div><div><b>Work</b><span>Tokyo · 東京</span></div></div>
+        <div class="card glass" id="m02-c2"><div class="kanji">留学</div><div><b>Study</b><span>Kyoto · 京都</span></div></div>
+        <div class="card glass" id="m02-c3"><div class="kanji">旅行</div><div><b>Travel</b><span>Hokkaido · 北海道</span></div></div>
+      </div>
+      <script>
+        (function () {
+          const T0 = 6.35;
+          const S = '[data-composition-id="m02"] ';
+          const $ = (s) => document.querySelector(S + s);
+          const m = JS.flatMap($("#m02-svg"), { center: [137.5, 37.2], scale: 2500 });
+          const places = [[JS.cities.tokyo, "#m02-p1", "#m02-c1", [44, -46]], [JS.cities.kyoto, "#m02-p2", "#m02-c2", [-400, 30]], [JS.cities.sapporo, "#m02-p3", "#m02-c3", [44, -46]]];
+          const place = () => {
+            m.apply();
+            places.forEach(([ll, p, c, off]) => {
+              const xy = m.toScreen(m.proj(ll));
+              $(p).style.left = xy[0] + "px"; $(p).style.top = xy[1] + "px";
+              $(c).style.left = xy[0] + off[0] + "px"; $(c).style.top = xy[1] + off[1] + "px";
+            });
+          };
+          const tl = gsap.timeline({ paused: true, onUpdate: place });
+          const c0 = m.lookAt([137.5, 37.2], 0.55), c1 = m.lookAt([137.5, 37.2], 1.0);
+          tl.fromTo(m.camera, c0, { ...c1, duration: 1.0, ease: "power3.out" }, 0);
+          tl.to(m.camera, { z: 1.06, duration: 4.6, ease: "none" }, 1.0);
+          tl.set([$("#m02-p1"), $("#m02-p2"), $("#m02-p3"), $("#m02-c1"), $("#m02-c2"), $("#m02-c3")], { opacity: 0 }, 0);
+          [["work", "#m02-p1", "#m02-c1", "L03"], ["degree", "#m02-p2", "#m02-c2", "L04"], ["trip", "#m02-p3", "#m02-c3", "L05"]].forEach(([w, p, c, id]) => {
+            const t = JS.word(id, w).s - T0;
+            tl.fromTo($(p), { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(3)" }, t - 0.05);
+            tl.fromTo(S + p + " .ring", { scale: 1, opacity: 0.9 }, { scale: 4, opacity: 0, duration: 1.0, ease: "power1.out" }, t);
+            tl.fromTo($(c), { opacity: 0, y: 18, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "power3.out" }, t + 0.05);
+          });
+          // hand-off: pull back toward the mainland for the flight
+          tl.to(m.camera, { z: 0.5, x: m.proj([120, 33])[0], duration: 0.6, ease: "power2.in" }, 5.95);
+          tl.to([$("#m02-c1"), $("#m02-c2"), $("#m02-c3"), $("#m02-p1"), $("#m02-p2"), $("#m02-p3")], { opacity: 0, duration: 0.3 }, 5.95);
+          place();
+          window.__timelines["m02"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

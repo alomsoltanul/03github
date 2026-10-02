@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; background: #0e1a30; }
+        [data-composition-id="m08"] svg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+        [data-composition-id="m08"] .vignette { background: radial-gradient(ellipse 70% 75% at 35% 45%, rgba(11, 18, 32, 0) 45%, rgba(11, 18, 32, 0.8) 100%); }
+        [data-composition-id="m08"] .panel { position: absolute; left: 1120px; top: 140px; width: 700px; padding: 40px 46px 44px; }
+        [data-composition-id="m08"] .ph { display: flex; align-items: center; gap: 22px; }
+        [data-composition-id="m08"] .ph .kanji { font-size: 96px; color: var(--sand); }
+        [data-composition-id="m08"] .ph b { display: block; font-size: 52px; font-weight: 800; }
+        [data-composition-id="m08"] .ph span { display: block; font-size: 24px; color: #a9b7cf; font-weight: 600; margin-top: 4px; }
+        [data-composition-id="m08"] .what { margin-top: 30px; font-size: 32px; font-weight: 600; color: #e5e7eb; line-height: 1.35; }
+        [data-composition-id="m08"] .what .jp { color: var(--teal-hi); margin-left: 8px; }
+        [data-composition-id="m08"] .need { margin-top: 30px; font-size: 22px; font-weight: 700; letter-spacing: 0.2em; color: #7f8da6; }
+        [data-composition-id="m08"] .levels { display: flex; gap: 12px; margin-top: 14px; }
+        [data-composition-id="m08"] .levels i { flex: 1; height: 86px; border-radius: 16px; border: 2px solid rgba(255, 255, 255, 0.16); display: flex; align-items: center; justify-content: center; font-style: normal; font-size: 36px; font-weight: 800; color: #7f8da6; }
+        [data-composition-id="m08"] .levels i.on { background: var(--red); border-color: var(--red); color: #fff; box-shadow: 0 12px 30px rgba(230, 57, 70, 0.45); }
+        [data-composition-id="m08"] .note { margin-top: 18px; font-size: 26px; color: #cbd5e1; font-weight: 500; }
+      </style>
+      <div id="root" data-composition-id="m08" data-width="1920" data-height="1080" data-duration="16">
+        <svg id="m08-svg" viewBox="0 0 1920 1080"></svg>
+        <div class="layer vignette"></div>
+        <div class="pin" id="m08-p1" style="color: var(--sand)"><div class="ring"></div><div class="dot" style="background: var(--sand)"></div><div class="lab">Tokyo<small class="ja">東京</small></div></div>
+        <div class="pin" id="m08-p2" style="color: var(--sand)"><div class="ring"></div><div class="dot" style="background: var(--sand)"></div><div class="lab">Kyoto<small class="ja">京都</small></div></div>
+        <div class="pin" id="m08-p3" style="color: var(--sand)"><div class="ring"></div><div class="dot" style="background: var(--sand)"></div><div class="lab">Hokkaido<small class="ja">北海道</small></div></div>
+
+        <div class="panel glass" id="m08-k1">
+          <div class="ph"><div class="kanji">仕事</div><div><b>Work</b><span>Going for a job</span></div></div>
+          <div class="what">Specified Skilled Worker visa<span class="jp">特定技能</span></div>
+          <div class="need">JAPANESE LEVEL</div>
+          <div class="levels"><i>N5</i><i class="on">N4</i><i>N3</i><i>N2</i><i>N1</i></div>
+          <div class="note">JLPT N4 or the JFT-Basic test</div>
+        </div>
+        <div class="panel glass" id="m08-k2">
+          <div class="ph"><div class="kanji">留学</div><div><b>Study</b><span>Going to university</span></div></div>
+          <div class="what">Degrees taught in Japanese<span class="jp">大学</span></div>
+          <div class="need">JAPANESE LEVEL</div>
+          <div class="levels"><i>N5</i><i>N4</i><i>N3</i><i class="on">N2</i><i>N1</i></div>
+          <div class="note">Many universities ask for N2 or higher</div>
+        </div>
+        <div class="panel glass" id="m08-k3">
+          <div class="ph"><div class="kanji">旅行</div><div><b>Travel</b><span>Going to see it</span></div></div>
+          <div class="what">Getting around on your own<span class="jp">観光</span></div>
+          <div class="need">JAPANESE LEVEL</div>
+          <div class="levels"><i class="on">N5</i><i>N4</i><i>N3</i><i>N2</i><i>N1</i></div>
+          <div class="note">Kana, numbers and everyday phrases</div>
+        </div>
+      </div>
+      <script>
+        (function () {
+          const T0 = 63.9;
+          const S = '[data-composition-id="m08"] ';
+          const $ = (s) => document.querySelector(S + s);
+          const m = JS.flatMap($("#m08-svg"), { center: [137.5, 37.2], scale: 2500 });
+          const pins = [["#m08-p1", JS.cities.tokyo], ["#m08-p2", JS.cities.kyoto], ["#m08-p3", JS.cities.sapporo]];
+          const place = () => {
+            m.apply();
+            pins.forEach(([p, ll]) => { const xy = m.toScreen(m.proj(ll)); $(p).style.left = xy[0] + "px"; $(p).style.top = xy[1] + "px"; });
+          };
+          const tl = gsap.timeline({ paused: true, onUpdate: place });
+          tl.set([$("#m08-k1"), $("#m08-k2"), $("#m08-k3"), $("#m08-p1"), $("#m08-p2"), $("#m08-p3")], { opacity: 0 }, 0);
+          // map sits left of the panel
+          const view = (ll, z) => { const c = m.lookAt(ll, z); return { x: c.x + 330 / z, y: c.y, z }; };
+          tl.fromTo(m.camera, view([138, 37.5], 0.6), { ...view([138.5, 36.5], 0.95), duration: 1.0, ease: "power3.out" }, 0);
+          const beats = [["L19", "#m08-k1", "#m08-p1", JS.cities.tokyo], ["L20", "#m08-k2", "#m08-p2", JS.cities.kyoto], ["L21", "#m08-k3", "#m08-p3", JS.cities.sapporo]];
+          beats.forEach(([id, k, p, ll], i) => {
+            const t = JS.line(id).start - T0;
+            const end = i < 2 ? JS.line(beats[i + 1][0]).start - T0 - 0.35 : 15.6;
+            tl.to(m.camera, { ...view(ll, 1.25), duration: 0.9, ease: "power2.inOut" }, Math.max(0.6, t - 0.3));
+            tl.fromTo($(p), { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(3)" }, t);
+            tl.fromTo(S + p + " .ring", { scale: 1, opacity: 0.9 }, { scale: 4, opacity: 0, duration: 1.0, repeat: 1, ease: "power1.out" }, t + 0.05);
+            tl.fromTo($(k), { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, t + 0.1);
+            tl.fromTo(S + k + " .levels i.on", { scale: 0.6 }, { scale: 1, duration: 0.35, ease: "back.out(3)" }, t + 0.9);
+            tl.to([$(k), $(p)], { opacity: 0, x: -40, duration: 0.3, ease: "power2.in" }, end);
+          });
+          place();
+          window.__timelines["m08"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

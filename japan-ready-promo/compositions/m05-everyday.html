@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        [data-composition-id="m05"] .bg { background: radial-gradient(ellipse at 50% 40%, #ffffff 0%, var(--cream) 60%, #efe7dc 100%); }
+        [data-composition-id="m05"] .seg { position: absolute; inset: 0; }
+        /* A — train */
+        [data-composition-id="m05"] .window { position: absolute; left: 0; right: 0; top: 540px; height: 290px; background: linear-gradient(180deg, #1b2a44, #22385c); overflow: hidden; }
+        [data-composition-id="m05"] .bldg { position: absolute; bottom: 0; background: #2f4a73; border-radius: 4px 4px 0 0; }
+        [data-composition-id="m05"] .bldg i { position: absolute; width: 10px; height: 14px; background: #f4c27a; opacity: 0.5; border-radius: 2px; }
+        [data-composition-id="m05"] .frame { position: absolute; left: 0; right: 0; top: 520px; height: 330px; border-top: 22px solid #d9d2c7; border-bottom: 26px solid #d9d2c7; }
+        [data-composition-id="m05"] .led { position: absolute; left: 260px; top: 90px; width: 1400px; height: 380px; border-radius: 24px; background: #0b0c10; box-shadow: 0 30px 80px rgba(22, 19, 32, 0.35), inset 0 0 0 6px #23262e; overflow: hidden; }
+        [data-composition-id="m05"] .ledtxt { position: absolute; left: 60px; top: 46px; font-family: var(--jp-sans); font-weight: 700; font-size: 110px; color: #ff9d3b; text-shadow: 0 0 18px rgba(255, 140, 40, 0.55); white-space: nowrap; letter-spacing: 0.06em; }
+        [data-composition-id="m05"] .ledtxt small { font-size: 54px; margin-right: 24px; color: #ffcf8a; }
+        [data-composition-id="m05"] .ledgrid { position: absolute; inset: 0; background-image: radial-gradient(rgba(0, 0, 0, 0.55) 1.2px, transparent 1.3px); background-size: 6px 6px; }
+        [data-composition-id="m05"] .line { position: absolute; left: 330px; top: 236px; width: 1260px; height: 12px; border-radius: 12px; background: #9acd32; opacity: 0.9; }
+        [data-composition-id="m05"] .stn { position: absolute; top: 222px; width: 40px; height: 40px; margin-left: -20px; border-radius: 50%; background: #0b0c10; border: 7px solid #9acd32; }
+        [data-composition-id="m05"] .stl { position: absolute; top: 284px; width: 220px; margin-left: -110px; text-align: center; font-family: var(--jp-sans); font-weight: 700; font-size: 36px; color: #e5e7eb; }
+        [data-composition-id="m05"] .stl.next { color: #ff9d3b; }
+        [data-composition-id="m05"] .trn { position: absolute; top: 214px; width: 70px; height: 56px; margin-left: -35px; border-radius: 12px; background: #ff9d3b; box-shadow: 0 0 20px rgba(255, 157, 59, 0.7); }
+        /* B — form */
+        [data-composition-id="m05"] .paper { position: absolute; left: 520px; top: 90px; width: 880px; height: 760px; background: #fff; border-radius: 10px; box-shadow: 0 30px 80px rgba(22, 19, 32, 0.18); padding: 46px 56px; }
+        [data-composition-id="m05"] .ptitle { font-family: var(--jp); font-weight: 900; font-size: 54px; text-align: center; letter-spacing: 0.2em; color: var(--ink); margin-bottom: 30px; }
+        [data-composition-id="m05"] .frow { display: grid; grid-template-columns: 200px 1fr; border: 2px solid #3f3a46; border-bottom: none; }
+        [data-composition-id="m05"] .frow:last-child { border-bottom: 2px solid #3f3a46; }
+        [data-composition-id="m05"] .frow b { font-family: var(--jp-sans); font-weight: 700; font-size: 30px; padding: 22px 18px; background: #f3efe8; border-right: 2px solid #3f3a46; color: var(--ink); }
+        [data-composition-id="m05"] .frow span { position: relative; }
+        [data-composition-id="m05"] .hl { position: absolute; inset: 6px; border-radius: 6px; background: rgba(244, 162, 97, 0.28); transform-origin: 0 50%; }
+        [data-composition-id="m05"] .caret { position: absolute; left: 22px; top: 22px; width: 4px; height: 42px; background: var(--ink); }
+        [data-composition-id="m05"] .stamp { position: absolute; right: 70px; top: 52px; width: 110px; height: 110px; border-radius: 50%; border: 6px solid var(--red); color: var(--red); display: flex; align-items: center; justify-content: center; font-family: var(--jp); font-weight: 900; font-size: 34px; }
+        /* C — interview */
+        [data-composition-id="m05"] .room { position: absolute; left: 260px; top: 90px; width: 1400px; height: 700px; border-radius: 30px; background: #f3efe8; box-shadow: inset 0 0 0 2px #e6dfd4; }
+        [data-composition-id="m05"] .chip { position: absolute; left: 50px; top: 40px; padding: 10px 22px; border-radius: 999px; background: var(--ink); color: #fff; font-family: var(--jp-sans); font-weight: 700; font-size: 26px; }
+        [data-composition-id="m05"] .avatar { position: absolute; width: 190px; height: 190px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-family: var(--jp); font-weight: 900; font-size: 64px; }
+        [data-composition-id="m05"] .bubble { position: absolute; padding: 28px 36px; border-radius: 28px; font-family: var(--jp-sans); font-weight: 700; font-size: 54px; white-space: nowrap; box-shadow: 0 18px 40px rgba(22, 19, 32, 0.14); }
+        [data-composition-id="m05"] .who { position: absolute; font-size: 24px; font-weight: 600; color: var(--muted); }
+        [data-composition-id="m05"] .tdot { display: inline-block; width: 18px; height: 18px; border-radius: 50%; background: #9a929f; margin: 0 6px; }
+      </style>
+      <div id="root" data-composition-id="m05" data-width="1920" data-height="1080" data-duration="13.6">
+        <div class="layer bg"></div>
+
+        <div class="seg" id="m05-A">
+          <div class="window" id="m05-window"><div id="m05-city" class="layer"></div></div>
+          <div class="frame"></div>
+          <div class="led" id="m05-led">
+            <div class="ledtxt" id="m05-ledtxt"><small>次は</small>新宿</div>
+            <div class="line"></div>
+            <div class="stn" style="left: 380px"></div><div class="stl" style="left: 380px">渋谷</div>
+            <div class="stn" style="left: 700px"></div><div class="stl" style="left: 700px">原宿</div>
+            <div class="stn" style="left: 1020px"></div><div class="stl" style="left: 1020px">代々木</div>
+            <div class="stn" style="left: 1340px"></div><div class="stl next" style="left: 1340px">新宿</div>
+            <div class="trn" id="m05-trn" style="left: 1020px"></div>
+            <div class="ledgrid"></div>
+          </div>
+        </div>
+
+        <div class="seg" id="m05-B">
+          <div class="paper" id="m05-paper">
+            <div class="ptitle">住民異動届</div>
+            <div class="frow"><b>氏名</b><span><i class="hl m05-hl"></i><i class="caret" id="m05-caret"></i></span></div>
+            <div class="frow"><b>フリガナ</b><span><i class="hl m05-hl"></i></span></div>
+            <div class="frow"><b>住所</b><span><i class="hl m05-hl"></i></span></div>
+            <div class="frow"><b>生年月日</b><span><i class="hl m05-hl"></i></span></div>
+            <div class="frow"><b>国籍・地域</b><span><i class="hl m05-hl"></i></span></div>
+            <div class="frow"><b>世帯主</b><span><i class="hl m05-hl"></i></span></div>
+            <div class="stamp" id="m05-stamp">受付</div>
+          </div>
+        </div>
+
+        <div class="seg" id="m05-C">
+          <div class="room">
+            <div class="chip">面接 · 14:00</div>
+            <div class="avatar" id="m05-av1" style="left: 120px; top: 230px; background: var(--navy)">面</div>
+            <div class="who" style="left: 128px; top: 440px">Interviewer</div>
+            <div class="bubble" id="m05-q" style="left: 340px; top: 250px; background: #fff; color: var(--ink)">自己紹介をお願いします。</div>
+            <div class="avatar" id="m05-av2" style="left: 1090px; top: 440px; background: var(--teal); font-family: var(--sans); font-weight: 800; font-size: 52px">You</div>
+            <div class="who" style="left: 1150px; top: 650px">You</div>
+            <div class="bubble" id="m05-a" style="left: 790px; top: 470px; background: #e7f4f2; padding: 30px 34px"><span class="tdot"></span><span class="tdot"></span><span class="tdot"></span></div>
+          </div>
+        </div>
+      </div>
+      <script>
+        (function () {
+          const T0 = 25.0;
+          const S = '[data-composition-id="m05"] ';
+          const $ = (s) => document.querySelector(S + s);
+          const r = JS.rng(5);
+          const city = $("#m05-city");
+          let x = 0;
+          while (x < 4200) {
+            const w = 80 + Math.floor(r() * 160), h = 90 + Math.floor(r() * 190);
+            const b = document.createElement("div");
+            b.className = "bldg";
+            b.style.cssText = `left:${x}px;width:${w}px;height:${h}px`;
+            for (let k = 0; k < Math.floor(w * h / 2600); k++) {
+              const win = document.createElement("i");
+              win.style.left = 8 + Math.floor(r() * (w - 24)) + "px";
+              win.style.top = 10 + Math.floor(r() * (h - 30)) + "px";
+              b.appendChild(win);
+            }
+            city.appendChild(b);
+            x += w + 14 + Math.floor(r() * 30);
+          }
+          const tl = gsap.timeline({ paused: true });
+          const J1 = JS.line("J01").start - T0, L10 = JS.line("L10"), L11 = JS.line("L11").start - T0, L12 = JS.line("L12").start - T0, J2 = JS.line("J02").start - T0;
+          const segB = L11 - 0.25, segC = L12 - 0.2;
+          tl.set([$("#m05-B"), $("#m05-C")], { opacity: 0 }, 0);
+
+          // A — train: city slides past, the train marker moves toward 新宿
+          tl.fromTo(city, { x: 0 }, { x: -2600, duration: segB, ease: "none" }, 0);
+          tl.fromTo($("#m05-led"), { y: -40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 0);
+          tl.fromTo($("#m05-ledtxt"), { x: 1300 }, { x: 0, duration: 0.9, ease: "power2.out" }, J1 - 0.35);
+          tl.set($("#m05-trn"), { x: 0, opacity: 1 }, 0);
+          tl.to($("#m05-trn"), { x: 280, duration: L10.end - T0, ease: "sine.inOut" }, 0);
+          tl.to($("#m05-trn"), { opacity: 0.45, duration: 0.4, repeat: 7, yoyo: true, ease: "sine.inOut" }, 0.3);
+          tl.to($("#m05-A"), { xPercent: -100, duration: 0.45, ease: "power3.inOut" }, segB);
+
+          // B — the form at the city office
+          tl.set($("#m05-B"), { opacity: 1 }, segB);
+          tl.fromTo($("#m05-paper"), { xPercent: 120, rotation: 4 }, { xPercent: 0, rotation: -1.5, duration: 0.5, ease: "power3.out" }, segB);
+          gsap.utils.toArray(S + ".m05-hl").forEach((h, i) => tl.fromTo(h, { scaleX: 0 }, { scaleX: 1, duration: 0.25, ease: "power2.out" }, segB + 0.4 + i * 0.18));
+          tl.fromTo($("#m05-caret"), { opacity: 1 }, { opacity: 0, duration: 0.25, repeat: 7, yoyo: true, ease: "steps(1)" }, segB + 0.2);
+          tl.fromTo($("#m05-stamp"), { scale: 2, opacity: 0, rotation: -25 }, { scale: 1, opacity: 1, rotation: -12, duration: 0.2, ease: "power4.in" }, segB + 1.5);
+          tl.to($("#m05-B"), { xPercent: -100, duration: 0.45, ease: "power3.inOut" }, segC);
+
+          // C — the interview
+          tl.set($("#m05-C"), { opacity: 1 }, segC);
+          tl.fromTo($("#m05-C"), { xPercent: 100 }, { xPercent: 0, duration: 0.45, ease: "power3.inOut" }, segC);
+          tl.fromTo([$("#m05-av1"), $("#m05-av2")], { scale: 0 }, { scale: 1, duration: 0.4, stagger: 0.12, ease: "back.out(2)" }, segC + 0.3);
+          tl.fromTo($("#m05-q"), { opacity: 0, scale: 0.6, transformOrigin: "0% 50%" }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.8)" }, J2 - 0.05);
+          tl.fromTo($("#m05-a"), { opacity: 0, scale: 0.6, transformOrigin: "100% 50%" }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.8)" }, J2 + 1.4);
+          gsap.utils.toArray(S + ".tdot").forEach((d, i) => tl.fromTo(d, { y: 0 }, { y: -10, duration: 0.25, repeat: 5, yoyo: true, ease: "sine.inOut" }, J2 + 1.5 + i * 0.12));
+          window.__timelines["m05"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

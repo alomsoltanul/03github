@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        [data-composition-id="m04"] .bg { background: radial-gradient(ellipse at 50% 40%, #ffffff 0%, var(--cream) 60%, #efe7dc 100%); }
+        [data-composition-id="m04"] .board { position: absolute; left: 410px; top: 150px; width: 1100px; padding: 28px 34px 30px; border-radius: 26px; background: #111a2c; box-shadow: 0 40px 90px rgba(22, 19, 32, 0.35); color: #fff; }
+        [data-composition-id="m04"] .bh { display: flex; align-items: baseline; gap: 22px; margin-bottom: 18px; }
+        [data-composition-id="m04"] .bh .kanji { font-size: 64px; color: var(--sand); }
+        [data-composition-id="m04"] .bh .clock { margin-left: auto; font-size: 34px; font-weight: 700; color: #a9b7cf; font-variant-numeric: tabular-nums; }
+        [data-composition-id="m04"] .row { display: grid; grid-template-columns: 150px 1fr 250px 170px; gap: 14px; padding: 12px 0; border-top: 1px solid rgba(255, 255, 255, 0.08); align-items: center; }
+        [data-composition-id="m04"] .row.head { font-family: var(--jp-sans); font-weight: 700; font-size: 22px; color: #7f8da6; border-top: none; padding-top: 0; }
+        [data-composition-id="m04"] .cell { display: flex; gap: 4px; }
+        [data-composition-id="m04"] .flap { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; height: 56px; padding: 0 4px; border-radius: 6px; background: #1c2840; font-family: var(--jp-sans); font-weight: 700; font-size: 34px; color: #f3f4f6; box-shadow: inset 0 -28px 0 rgba(0, 0, 0, 0.18); }
+        [data-composition-id="m04"] .ok .flap { color: #7ee2c8; }
+        [data-composition-id="m04"] .sign { position: absolute; display: flex; align-items: center; gap: 16px; padding: 18px 30px; border-radius: 14px; font-family: var(--jp-sans); font-weight: 700; white-space: nowrap; box-shadow: 0 18px 40px rgba(22, 19, 32, 0.22); }
+        [data-composition-id="m04"] .sign.y { background: #f6c945; color: #161320; }
+        [data-composition-id="m04"] .sign.n { background: #1d3557; color: #fff; }
+        [data-composition-id="m04"] .sign.w { background: #fff; color: #161320; border: 3px solid #161320; }
+        [data-composition-id="m04"] .sign.r { background: var(--red); color: #fff; }
+        [data-composition-id="m04"] .sign .ar { font-family: var(--sans); font-weight: 800; }
+      </style>
+      <div id="root" data-composition-id="m04" data-width="1920" data-height="1080" data-duration="4.8">
+        <div class="layer bg"></div>
+        <div class="board" id="m04-board">
+          <div class="bh"><span class="kanji">到着</span><span class="jp" style="font-size: 30px; color: #cbd5e1">国際線</span><span class="clock">14:31</span></div>
+          <div class="row head"><span>便名</span><span>出発地</span><span>時刻</span><span>状況</span></div>
+        </div>
+        <div class="layer" id="m04-signs"></div>
+      </div>
+      <script>
+        (function () {
+          const T0 = 20.2;
+          const S = '[data-composition-id="m04"] ';
+          const $ = (s) => document.querySelector(S + s);
+          const rows = [["101", "ダッカ", "14:25", "到着", true], ["205", "バンコク", "14:40", "着陸", false], ["318", "ソウル", "15:05", "定刻", false], ["422", "台北", "15:20", "定刻", false]];
+          const board = $("#m04-board");
+          const noise = "アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789";
+          const r = JS.rng(9);
+          const flaps = [];
+          rows.forEach((row) => {
+            const d = document.createElement("div");
+            d.className = "row" + (row[4] ? " ok" : "");
+            row.slice(0, 4).forEach((txt) => {
+              const c = document.createElement("div");
+              c.className = "cell";
+              [...txt].forEach((ch) => {
+                const f = document.createElement("span");
+                f.className = "flap m04-flap";
+                f.textContent = ch;
+                f.dataset.final = ch;
+                f.dataset.n1 = noise[Math.floor(r() * noise.length)];
+                f.dataset.n2 = noise[Math.floor(r() * noise.length)];
+                c.appendChild(f);
+                flaps.push(f);
+              });
+              d.appendChild(c);
+            });
+            board.appendChild(d);
+          });
+          const signs = [
+            ["y", "出口", "→", 120, 120, -4, 64], ["n", "改札口", "↑", 1440, 110, 3, 56], ["w", "乗り換え", "←", 140, 560, 2, 50],
+            ["n", "手荷物受取所", "", 1360, 520, -3, 46], ["n", "入国審査", "", 700, 70, 2, 50], ["y", "1番線", "↓", 1560, 330, -2, 50],
+            ["w", "お手洗い", "→", 120, 360, -3, 46], ["r", "現金のみ", "", 1250, 760, 4, 44], ["n", "両替", "", 520, 760, -2, 50], ["w", "立入禁止", "", 860, 690, 3, 44],
+          ];
+          const host = $("#m04-signs");
+          signs.forEach(([k, txt, ar, x, y, rot, fs]) => {
+            const s = document.createElement("div");
+            s.className = "sign m04-sign " + k;
+            s.style.cssText = `left:${x}px;top:${y}px;font-size:${fs}px`;
+            s.innerHTML = (ar === "←" ? `<span class="ar">${ar}</span>` : "") + `<span>${txt}</span>` + (ar && ar !== "←" ? `<span class="ar">${ar}</span>` : "");
+            s.dataset.rot = rot;
+            host.appendChild(s);
+          });
+
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo($(".bg"), { opacity: 0.6 }, { opacity: 1, duration: 0.3 }, 0);
+          tl.fromTo(board, { y: 60, opacity: 0, scale: 0.94 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" }, 0.0);
+          // split-flap: two noise characters, then the real one
+          flaps.forEach((f, i) => {
+            const t = 0.25 + (i % 11) * 0.03 + Math.floor(i / 11) * 0.05;
+            tl.set(f, { textContent: f.dataset.n1 }, 0);
+            tl.fromTo(f, { scaleY: 1 }, { scaleY: 0.1, duration: 0.05, yoyo: true, repeat: 1, ease: "none" }, t);
+            tl.set(f, { textContent: f.dataset.n2 }, t + 0.05);
+            tl.fromTo(f, { scaleY: 1 }, { scaleY: 0.1, duration: 0.05, yoyo: true, repeat: 1, ease: "none" }, t + 0.12);
+            tl.set(f, { textContent: f.dataset.final }, t + 0.17);
+          });
+          // "everything around you is in Japanese"
+          const t9 = JS.word("L09", "everything").s - T0;
+          tl.to(board, { scale: 0.72, y: 40, duration: 0.6, ease: "power2.inOut" }, t9 - 0.2);
+          gsap.utils.toArray(S + ".m04-sign").forEach((s, i) => {
+            tl.fromTo(s, { opacity: 0, y: -40, rotation: +s.dataset.rot * 3, scale: 1.15 }, { opacity: 1, y: 0, rotation: +s.dataset.rot, scale: 1, duration: 0.35, ease: "back.out(2)" }, t9 + i * 0.17);
+          });
+          tl.to(host, { scale: 1.04, duration: 1.5, ease: "none" }, t9 + 1.6);
+          tl.to([board, host], { opacity: 0, scale: 0.92, duration: 0.3, ease: "power2.in" }, 4.5);
+          window.__timelines["m04"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

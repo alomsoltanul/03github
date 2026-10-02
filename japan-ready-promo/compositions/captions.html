@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+        [data-composition-id="cap"] .page { position: absolute; left: 960px; top: 900px; max-width: 1560px; padding: 18px 34px 20px; border-radius: 20px; background: rgba(11, 18, 32, 0.78); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28); text-align: center; white-space: nowrap; }
+        [data-composition-id="cap"] .w { display: inline-block; font-size: 50px; font-weight: 700; color: #fff; letter-spacing: -0.01em; margin: 0 0.13em; line-height: 1.15; }
+        [data-composition-id="cap"] .w.k-jp { color: #ff6b75; }
+        [data-composition-id="cap"] .w.k-bn { color: #5fc4b8; }
+        [data-composition-id="cap"] .w.k-lv { color: #f4a261; }
+        [data-composition-id="cap"] .jaline { font-family: var(--jp-sans); font-weight: 700; font-size: 48px; letter-spacing: 0.04em; }
+        [data-composition-id="cap"] .jaline span { display: inline-block; color: rgba(255, 255, 255, 0.35); }
+        [data-composition-id="cap"] .tr { font-family: var(--serif); font-style: italic; font-size: 36px; color: #f4a261; margin-top: 4px; }
+      </style>
+      <div id="root" data-composition-id="cap" data-width="1920" data-height="1080" data-duration="87.6"></div>
+      <script>
+        (function () {
+          const S = '[data-composition-id="cap"] ';
+          const host = document.querySelector(S.trim());
+          const root = host.querySelector('[data-composition-id="cap"]') || host;
+          const KEY = { jp: /^(japan|japanese|japan's)$/i, bn: /^(bangla|dhaka)$/i, lv: /^(n1|n2|n4|jlpt)$/i };
+          const keyOf = (w) => { const c = w.replace(/[^A-Za-z0-9']/g, ""); for (const k in KEY) if (KEY[k].test(c)) return "k-" + k; return ""; };
+          const tl = gsap.timeline({ paused: true });
+          const pages = [];
+
+          window.CAPTIONS.lines.forEach((line) => {
+            if (line.id === "J03") return; // the closing scene sets this line itself
+            if (line.lang === "en") {
+              // break long lines into readable pages at punctuation
+              let cur = [];
+              line.words.forEach((w, i) => {
+                cur.push(w);
+                const brk = /[,.?]$/.test(w.w) && cur.length >= 3 && i < line.words.length - 1;
+                if (brk || cur.length >= 9) { pages.push({ kind: "en", words: cur }); cur = []; }
+              });
+              if (cur.length) pages.push({ kind: "en", words: cur });
+            } else {
+              pages.push({ kind: "ja", line });
+            }
+          });
+
+          pages.forEach((p, idx) => {
+            const el = document.createElement("div");
+            el.className = "page cap-page";
+            root.appendChild(el);
+            tl.set(el, { xPercent: -50, opacity: 0 }, 0);
+            const next = pages[idx + 1];
+            let t0, t1;
+            if (p.kind === "en") {
+              t0 = p.words[0].s - 0.12;
+              t1 = p.words[p.words.length - 1].e + 0.45;
+              p.words.forEach((w, i) => {
+                const sp = document.createElement("span");
+                sp.className = "w " + keyOf(w.w);
+                sp.textContent = w.w;
+                el.appendChild(sp);
+                const ws = Math.max(w.s - 0.04, t0 + 0.02);
+                tl.fromTo(sp, { opacity: 0.12, y: 16, filter: "blur(6px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.22, ease: "power3.out" }, ws);
+                if (!sp.classList.contains("k-jp") && !sp.classList.contains("k-bn") && !sp.classList.contains("k-lv")) {
+                  const wNext = p.words[i + 1];
+                  tl.to(sp, { color: "#f4a261", duration: 0.08 }, w.s);
+                  tl.to(sp, { color: "#ffffff", duration: 0.2 }, wNext ? wNext.s : w.e + 0.15);
+                } else {
+                  tl.fromTo(sp, { scale: 1 }, { scale: 1.12, duration: 0.14, yoyo: true, repeat: 1, ease: "power2.out" }, w.s);
+                }
+              });
+            } else {
+              const l = p.line;
+              t0 = l.start - 0.1;
+              t1 = l.end + 0.5;
+              const ja = document.createElement("div");
+              ja.className = "jaline";
+              const chars = [...l.text];
+              chars.forEach((c) => { const s = document.createElement("span"); s.textContent = c; ja.appendChild(s); });
+              const tr = document.createElement("div");
+              tr.className = "tr";
+              tr.textContent = l.en;
+              el.appendChild(ja);
+              el.appendChild(tr);
+              const [s0, s1] = l.speech;
+              [...ja.children].forEach((s, i) => tl.to(s, { color: "#ffffff", duration: 0.12 }, s0 + ((s1 - s0) * i) / chars.length));
+              tl.fromTo(tr, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.3 }, s0 + 0.3);
+            }
+            if (next) {
+              const ns = next.kind === "en" ? next.words[0].s - 0.12 : next.line.start - 0.1;
+              t1 = Math.min(t1, ns - 0.02);
+            }
+            tl.fromTo(el, { opacity: 0, y: 14, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 0.18, ease: "power2.out" }, t0);
+            tl.to(el, { opacity: 0, y: -8, duration: 0.16, ease: "power2.in" }, Math.max(t0 + 0.3, t1 - 0.16));
+          });
+          window.__timelines["cap"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        [data-composition-id="m07"] .bg { background: radial-gradient(ellipse at 50% 35%, #ffffff 0%, var(--cream) 60%, #efe7dc 100%); }
+        [data-composition-id="m07"] .ph { position: absolute; inset: 0; }
+        [data-composition-id="m07"] .logo { position: absolute; left: 510px; top: 150px; width: 900px; }
+        [data-composition-id="m07"] .tag { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-size: 44px; color: var(--navy); }
+        [data-composition-id="m07"] .ladder { position: absolute; left: 250px; top: 470px; width: 1420px; height: 330px; }
+        [data-composition-id="m07"] .step { position: absolute; bottom: 0; width: 190px; border-radius: 22px 22px 8px 8px; background: #fff; box-shadow: 0 18px 40px rgba(22, 19, 32, 0.1); display: flex; align-items: flex-start; justify-content: center; padding-top: 22px; font-size: 56px; font-weight: 800; color: var(--ink); transform-origin: 50% 100%; }
+        [data-composition-id="m07"] .step.kana { font-family: var(--jp-sans); }
+        [data-composition-id="m07"] .step.on { background: var(--red); color: #fff; }
+        [data-composition-id="m07"] .card { position: absolute; background: #fff; border-radius: 30px; box-shadow: 0 30px 80px rgba(22, 19, 32, 0.14); }
+        [data-composition-id="m07"] .chead { display: flex; align-items: center; gap: 16px; font-size: 26px; font-weight: 700; color: var(--muted); }
+        [data-composition-id="m07"] .chead .kanji { font-size: 40px; color: var(--red); }
+        [data-composition-id="m07"] .pattern { font-family: var(--jp-sans); font-weight: 700; font-size: 120px; color: var(--ink); margin-top: 22px; }
+        [data-composition-id="m07"] .expl { margin-top: 18px; font-size: 46px; color: var(--navy); line-height: 1.5; }
+        [data-composition-id="m07"] .ex { margin-top: 30px; padding-top: 26px; border-top: 2px solid #f0ebe3; }
+        [data-composition-id="m07"] .ex .ja { font-family: var(--jp-sans); font-weight: 700; font-size: 46px; color: var(--ink); }
+        [data-composition-id="m07"] .ex .ja b { color: var(--red); }
+        [data-composition-id="m07"] .ex .bnl { font-size: 40px; color: var(--teal-deep); margin-top: 10px; }
+        [data-composition-id="m07"] svg.chart { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; }
+        [data-composition-id="m07"] .flash { position: absolute; left: 1290px; top: 250px; width: 360px; height: 230px; border-radius: 26px; background: var(--navy); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 30px 70px rgba(29, 53, 87, 0.3); }
+        [data-composition-id="m07"] .flash .kanji { font-size: 96px; }
+        [data-composition-id="m07"] .flash span { font-family: var(--jp-sans); font-weight: 700; font-size: 30px; color: var(--sand); margin-top: 10px; }
+        [data-composition-id="m07"] .flashb { position: absolute; left: 1290px; top: 250px; width: 360px; height: 230px; border-radius: 26px; background: var(--teal); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 64px; box-shadow: 0 30px 70px rgba(42, 157, 143, 0.3); }
+        [data-composition-id="m07"] .wave { display: flex; align-items: center; gap: 9px; height: 200px; margin-top: 30px; }
+        [data-composition-id="m07"] .wave i { display: block; width: 14px; border-radius: 7px; background: var(--teal); }
+        [data-composition-id="m07"] .play { position: absolute; right: 50px; top: 46px; width: 90px; height: 90px; border-radius: 50%; background: var(--red); }
+        [data-composition-id="m07"] .play::after { content: ""; position: absolute; left: 36px; top: 26px; border-left: 30px solid #fff; border-top: 19px solid transparent; border-bottom: 19px solid transparent; }
+        [data-composition-id="m07"] .timer { font-size: 120px; font-weight: 800; color: var(--ink); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; margin-top: 24px; }
+        [data-composition-id="m07"] .timer small { display: block; font-family: var(--jp-sans); font-size: 28px; font-weight: 700; color: var(--muted); letter-spacing: 0.1em; }
+        [data-composition-id="m07"] .qdots { display: flex; gap: 10px; margin-top: 30px; flex-wrap: wrap; width: 560px; }
+        [data-composition-id="m07"] .qdots i { display: block; width: 34px; height: 34px; border-radius: 9px; background: #f0ebe3; }
+        [data-composition-id="m07"] .qdots i.done { background: var(--navy); }
+      </style>
+      <div id="root" data-composition-id="m07" data-width="1920" data-height="1080" data-duration="19.3">
+        <div class="layer bg"></div>
+
+        <div class="ph" id="m07-A">
+          <img class="logo" id="m07-logo" src="assets/img/logo-trim.png" alt="Japanese Shikhi" />
+          <div class="tag bn" id="m07-tag">বাংলায় JLPT জাপানি ভাষা শিক্ষা</div>
+          <div class="ladder" id="m07-ladder">
+            <svg class="chart" viewBox="0 0 1420 330"><path id="m07-lpath" d="M 95 250 L 1325 40" fill="none" stroke="#e63946" stroke-width="6" stroke-linecap="round" stroke-dasharray="1 14" /></svg>
+          </div>
+        </div>
+
+        <div class="ph" id="m07-B">
+          <div class="card" style="left: 260px; top: 110px; width: 1400px; height: 700px; padding: 54px 70px">
+            <div class="chead"><span class="kanji">文法</span>Grammar · N5</div>
+            <div class="pattern" id="m07-pat">〜ています</div>
+            <div class="expl bn" id="m07-expl">কোনো কাজ এখন চলছে — তা বোঝাতে ব্যবহার হয়।</div>
+            <div class="ex" id="m07-ex">
+              <div class="ja">今、日本語を<b>勉強しています</b>。</div>
+              <div class="bnl bn">এখন আমি জাপানি ভাষা শিখছি।</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ph" id="m07-C">
+          <div class="card" style="left: 200px; top: 110px; width: 1520px; height: 700px; padding: 46px 60px">
+            <div class="chead"><span class="kanji">復習</span>Spaced review</div>
+            <svg class="chart" viewBox="0 0 1520 700">
+              <g stroke="#ece6dc" stroke-width="2"><line x1="110" y1="590" x2="1080" y2="590" /><line x1="110" y1="170" x2="110" y2="590" /></g>
+              <text x="70" y="180" font-size="22" fill="#6b6574" font-family="Inter" font-weight="600" transform="rotate(-90 70 180)" text-anchor="end">memory</text>
+              <path id="m07-curve" d="M 110 190 C 150 330, 190 420, 230 450 L 230 190 C 290 300, 340 360, 400 390 L 400 190 C 480 270, 560 320, 640 340 L 640 190 C 740 240, 860 280, 980 300 L 980 190 C 1020 205, 1050 215, 1080 222" fill="none" stroke="#e63946" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+              <g font-family="Inter" font-size="24" font-weight="700" fill="#6b6574" text-anchor="middle">
+                <text x="230" y="630">Day 1</text><text x="400" y="630">Day 3</text><text x="640" y="630">Day 7</text><text x="980" y="630">Day 16</text>
+              </g>
+              <g id="m07-rdots" fill="#2a9d8f"><circle cx="230" cy="190" r="13" /><circle cx="400" cy="190" r="13" /><circle cx="640" cy="190" r="13" /><circle cx="980" cy="190" r="13" /></g>
+            </svg>
+          </div>
+          <div class="flash" id="m07-f1"><div class="kanji">勉強</div><span>べんきょう</span></div>
+          <div class="flashb bn" id="m07-f2">পড়াশোনা</div>
+        </div>
+
+        <div class="ph" id="m07-D">
+          <div class="card" id="m07-d1" style="left: 160px; top: 140px; width: 760px; height: 600px; padding: 46px 52px">
+            <div class="chead"><span class="kanji">聴解</span>Listening practice</div>
+            <div class="play"></div>
+            <div class="wave" id="m07-wave"></div>
+          </div>
+          <div class="card" id="m07-d2" style="left: 1000px; top: 140px; width: 760px; height: 600px; padding: 46px 52px">
+            <div class="chead"><span class="kanji">模試</span>Timed mock exam · N4</div>
+            <div class="timer"><small>残り時間</small><span id="m07-time">24:59</span></div>
+            <div class="qdots" id="m07-q"></div>
+          </div>
+        </div>
+      </div>
+      <script>
+        (function () {
+          gsap.registerPlugin(DrawSVGPlugin);
+          const T0 = 44.6;
+          const S = '[data-composition-id="m07"] ';
+          const $ = (s) => document.querySelector(S + s);
+          const t = (id, w) => JS.word(id, w).s - T0;
+          // ladder
+          const lad = $("#m07-ladder");
+          const steps = [["あ", 90], ["N5", 130], ["N4", 170], ["N3", 210], ["N2", 250], ["N1", 300]];
+          steps.forEach(([txt, h], i) => {
+            const s = document.createElement("div");
+            s.className = "step m07-step" + (i === 0 ? " kana" : "");
+            s.style.cssText = `left:${i * 246}px;height:${h}px`;
+            s.textContent = txt;
+            lad.appendChild(s);
+          });
+          // waveform + exam dots
+          const r = JS.rng(19);
+          const wave = $("#m07-wave");
+          for (let i = 0; i < 38; i++) { const b = document.createElement("i"); b.className = "m07-bar"; b.style.height = 30 + Math.floor(r() * 160) + "px"; wave.appendChild(b); }
+          const q = $("#m07-q");
+          for (let i = 0; i < 30; i++) { const d = document.createElement("i"); d.className = "m07-qd"; q.appendChild(d); }
+
+          const tl = gsap.timeline({ paused: true });
+          const phB = JS.line("L16").start - T0 - 0.3, phC = JS.line("L17").start - T0 - 0.3, phD = JS.line("L18").start - T0 - 0.3;
+          tl.set([$("#m07-B"), $("#m07-C"), $("#m07-D")], { opacity: 0 }, 0);
+
+          // A — logo, tagline, あ → N1
+          tl.fromTo($("#m07-logo"), { opacity: 0, scale: 1.12, filter: "blur(12px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.6, ease: "power3.out" }, 0.1);
+          tl.fromTo($("#m07-tag"), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, t("L15", "Bangla,") - 0.1);
+          tl.fromTo(S + ".m07-step", { scaleY: 0, opacity: 0 }, { scaleY: 1, opacity: 1, duration: 0.4, stagger: 0.08, ease: "back.out(1.6)" }, t("L15", "from") - 0.2);
+          tl.fromTo($("#m07-lpath"), { drawSVG: "0%" }, { drawSVG: "100%", duration: t("L15", "N1.") - t("L15", "hiragana") + 0.3, ease: "none" }, t("L15", "hiragana"));
+          const stepEls = gsap.utils.toArray(S + ".m07-step");
+          const span = t("L15", "N1.") - t("L15", "hiragana");
+          stepEls.forEach((s, i) => tl.to(s, { backgroundColor: "#e63946", color: "#ffffff", duration: 0.2 }, t("L15", "hiragana") + (span * i) / (stepEls.length - 1)));
+          tl.to($("#m07-A"), { opacity: 0, y: -30, duration: 0.35, ease: "power2.in" }, phB);
+
+          // B — grammar explained in Bangla
+          tl.set($("#m07-B"), { opacity: 1 }, phB);
+          tl.fromTo(S + "#m07-B .card", { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, phB);
+          tl.fromTo($("#m07-pat"), { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.4 }, phB + 0.3);
+          tl.fromTo($("#m07-expl"), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 }, t("L16", "explained") - 0.1);
+          tl.fromTo($("#m07-ex"), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 }, t("L16", "Bangla.") + 0.1);
+          tl.to($("#m07-B"), { opacity: 0, y: -30, duration: 0.35, ease: "power2.in" }, phC);
+
+          // C — spaced review: memory dips, each review lifts it back up
+          tl.set($("#m07-C"), { opacity: 1 }, phC);
+          tl.fromTo(S + "#m07-C .card", { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, phC);
+          tl.fromTo($("#m07-curve"), { drawSVG: "0%" }, { drawSVG: "100%", duration: 2.8, ease: "none" }, phC + 0.4);
+          tl.fromTo(S + "#m07-rdots circle", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.25, stagger: 0.62, ease: "back.out(3)" }, phC + 0.75);
+          tl.fromTo($("#m07-f1"), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4 }, phC + 0.5);
+          tl.fromTo($("#m07-f1"), { rotationY: 0 }, { rotationY: 90, duration: 0.2, ease: "power1.in" }, t("L17", "forget"));
+          tl.fromTo($("#m07-f2"), { rotationY: -90, opacity: 0 }, { rotationY: 0, opacity: 1, duration: 0.2, ease: "power1.out" }, t("L17", "forget") + 0.2);
+          tl.to($("#m07-C"), { opacity: 0, y: -30, duration: 0.35, ease: "power2.in" }, phD);
+
+          // D — listening + timed mock exams
+          tl.set($("#m07-D"), { opacity: 1 }, phD);
+          tl.fromTo($("#m07-d1"), { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, t("L18", "listening") - 0.3);
+          gsap.utils.toArray(S + ".m07-bar").forEach((b, i) => tl.fromTo(b, { scaleY: 0.3 }, { scaleY: 1, duration: 0.22 + (i % 4) * 0.05, repeat: 9, yoyo: true, ease: "sine.inOut" }, t("L18", "listening") + (i % 7) * 0.03));
+          tl.fromTo($("#m07-d2"), { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, t("L18", "mock") - 0.4);
+          const timeEl = $("#m07-time"), clk = { s: 1499 };
+          tl.fromTo(clk, { s: 1499 }, { s: 1495, duration: 4, ease: "steps(4)", onUpdate: () => { const v = Math.round(clk.s); timeEl.textContent = `${Math.floor(v / 60)}:${String(v % 60).padStart(2, "0")}`; } }, t("L18", "mock") - 0.2);
+          gsap.utils.toArray(S + ".m07-qd").forEach((d, i) => { if (i < 12) tl.to(d, { backgroundColor: "#1d3557", duration: 0.1 }, t("L18", "mock") + i * 0.12); });
+          window.__timelines["m07"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

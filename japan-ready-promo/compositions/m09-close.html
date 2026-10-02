@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        [data-composition-id="m09"] .bg { background: radial-gradient(ellipse at 70% 55%, #13213a 0%, var(--night) 70%); }
+        [data-composition-id="m09"] svg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+        [data-composition-id="m09"] .star { position: absolute; border-radius: 50%; background: #fff; }
+        [data-composition-id="m09"] .col { position: absolute; left: 150px; top: 200px; width: 860px; }
+        [data-composition-id="m09"] .logo { width: 760px; display: block; }
+        [data-composition-id="m09"] .tag { margin-top: 26px; font-size: 42px; color: #cbd5e1; }
+        [data-composition-id="m09"] .ja { margin-top: 70px; font-family: var(--jp); font-weight: 900; font-size: 80px; color: #fff; letter-spacing: 0.02em; white-space: nowrap; }
+        [data-composition-id="m09"] .ja span { display: inline-block; }
+        [data-composition-id="m09"] .en { margin-top: 12px; font-size: 54px; color: var(--sand); }
+        [data-composition-id="m09"] .url { position: absolute; left: 150px; top: 860px; font-size: 40px; font-weight: 700; color: #fff; letter-spacing: 0.01em; }
+        [data-composition-id="m09"] .url i { font-style: normal; color: var(--red-hi); }
+      </style>
+      <div id="root" data-composition-id="m09" data-width="1920" data-height="1080" data-duration="7.7">
+        <div class="layer bg"></div>
+        <div class="layer" id="m09-stars"></div>
+        <svg id="m09-svg" viewBox="0 0 1920 1080"></svg>
+        <div class="pin" id="m09-dhaka" style="color: var(--teal-hi)"><div class="ring"></div><div class="dot" style="background: var(--teal)"></div></div>
+        <div class="pin" id="m09-tokyo" style="color: var(--red-hi)"><div class="ring"></div><div class="dot" style="background: var(--red)"></div></div>
+        <div class="col">
+          <img class="logo" id="m09-logo" src="assets/img/logo-dark-trim.png" alt="Japanese Shikhi" />
+          <div class="tag bn" id="m09-tag">বাংলায় JLPT জাপানি ভাষা শিক্ষা</div>
+          <div class="ja" id="m09-ja"><span>日</span><span>本</span><span>で</span><span>会</span><span>い</span><span>ま</span><span>し</span><span>ょ</span><span>う</span><span>。</span></div>
+          <div class="en serif" id="m09-en">See you in Japan.</div>
+        </div>
+        <div class="url" id="m09-url">japanese<i>shikhi</i>.com</div>
+      </div>
+      <script>
+        (function () {
+          const T0 = 79.9;
+          const S = '[data-composition-id="m09"] ';
+          const $ = (s) => document.querySelector(S + s);
+          const r = JS.rng(88);
+          for (let i = 0; i < 60; i++) {
+            const d = document.createElement("div");
+            d.className = "star m09-star";
+            const z = 1 + Math.floor(r() * 3);
+            d.style.cssText = `left:${Math.floor(r() * 1920)}px;top:${Math.floor(r() * 1080)}px;width:${z}px;height:${z}px;opacity:${(0.2 + r() * 0.5).toFixed(2)}`;
+            $("#m09-stars").appendChild(d);
+          }
+          const g = JS.globe($("#m09-svg"), { id: "m09g", cx: 1420, cy: 560 });
+          const st = { lon: 112, lat: 28, scale: 1100, arc: 1, jp: 1 };
+          const pins = [[$("#m09-dhaka"), JS.cities.dhaka], [$("#m09-tokyo"), JS.cities.tokyo]];
+          const draw = () => {
+            g.render(st);
+            pins.forEach(([p, ll]) => { const xy = g.at(ll); if (xy) { p.style.left = xy[0] + "px"; p.style.top = xy[1] + "px"; p.style.visibility = "visible"; } else p.style.visibility = "hidden"; });
+          };
+          const tl = gsap.timeline({ paused: true, onUpdate: draw });
+          const tStart = JS.word("L22", "start").s - T0, tBangla = JS.word("L22", "Bangla.").s - T0, tJa = JS.line("J03").start - T0;
+          tl.fromTo(st, { lon: 112, lat: 28, scale: 1100 }, { lon: 116, lat: 30, scale: 520, duration: 3.0, ease: "power3.out" }, 0);
+          tl.to(st, { lon: 122, duration: 4.7, ease: "none" }, 3.0);
+          tl.fromTo(S + ".m09-star", { opacity: 0 }, { opacity: 0.6, duration: 1.2, stagger: 0.01 }, 0);
+          tl.set([$("#m09-ja")], { opacity: 0 }, 0);
+          tl.fromTo($("#m09-logo"), { opacity: 0, y: 24, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.6, ease: "power3.out" }, tStart - 0.2);
+          tl.fromTo($("#m09-tag"), { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, tBangla - 0.1);
+          tl.set($("#m09-ja"), { opacity: 1 }, tJa - 0.1);
+          gsap.utils.toArray(S + "#m09-ja span").forEach((c, i) => tl.fromTo(c, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, tJa - 0.1 + i * 0.12));
+          tl.fromTo($("#m09-en"), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, tJa + 1.3);
+          tl.fromTo($("#m09-url"), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, tJa + 1.8);
+          tl.fromTo(S + "#m09-tokyo .ring", { scale: 1, opacity: 0.9 }, { scale: 4.5, opacity: 0, duration: 1.2, repeat: 4, ease: "power1.out" }, 0.4);
+          draw();
+          window.__timelines["m09"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

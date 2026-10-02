@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; background: #0e1a30; }
+        [data-composition-id="m03"] svg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+        [data-composition-id="m03"] .hud { position: absolute; left: 100px; top: 90px; width: 470px; padding: 26px 30px; }
+        [data-composition-id="m03"] .route { display: flex; align-items: center; gap: 18px; font-size: 52px; font-weight: 800; letter-spacing: 0.04em; }
+        [data-composition-id="m03"] .route i { font-style: normal; color: var(--sand); font-size: 40px; }
+        [data-composition-id="m03"] .cities { font-size: 22px; color: #a9b7cf; margin-top: 4px; font-weight: 500; }
+        [data-composition-id="m03"] .dist { margin-top: 20px; font-size: 64px; font-weight: 800; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+        [data-composition-id="m03"] .dist small { font-size: 30px; font-weight: 600; color: #a9b7cf; margin-left: 10px; }
+        [data-composition-id="m03"] .bar { margin-top: 18px; height: 8px; border-radius: 8px; background: rgba(255, 255, 255, 0.12); overflow: hidden; }
+        [data-composition-id="m03"] .bar i { display: block; width: 100%; height: 100%; background: var(--sand); transform-origin: 0 50%; }
+        [data-composition-id="m03"] .cloud { position: absolute; border-radius: 50%; background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0) 70%); }
+        [data-composition-id="m03"] .plane { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+        [data-composition-id="m03"] .plane svg { position: absolute; left: -34px; top: -34px; width: 68px; height: 68px; overflow: visible; }
+        [data-composition-id="m03"] .flash { background: #fbf8f3; opacity: 0; }
+      </style>
+      <div id="root" data-composition-id="m03" data-width="1920" data-height="1080" data-duration="7.3">
+        <svg id="m03-svg" viewBox="0 0 1920 1080"></svg>
+        <div class="layer" id="m03-clouds"></div>
+        <div class="pin" id="m03-dhaka" style="color: var(--teal-hi)"><div class="ring"></div><div class="dot" style="background: var(--teal)"></div><div class="lab">Dhaka<small>ঢাকা</small></div></div>
+        <div class="pin" id="m03-tokyo" style="color: var(--red-hi)"><div class="ring"></div><div class="dot" style="background: var(--red)"></div><div class="lab">Tokyo<small class="ja">東京</small></div></div>
+        <div class="plane" id="m03-plane">
+          <svg viewBox="-34 -34 68 68"><path d="M30 0 L8 -4 L-6 -26 L-12 -26 L-4 -4 L-18 -3 L-24 -11 L-29 -11 L-25 0 L-29 11 L-24 11 L-18 3 L-4 4 L-12 26 L-6 26 L8 4 Z" fill="#ffffff" stroke="#0e1a30" stroke-width="1.5" /></svg>
+        </div>
+        <div class="hud glass" id="m03-hud">
+          <div class="route">DAC <i>→</i> TYO</div>
+          <div class="cities">Dhaka → Tokyo · great-circle distance</div>
+          <div class="dist"><span id="m03-km">0</span><small>km</small></div>
+          <div class="bar"><i id="m03-bar"></i></div>
+        </div>
+        <div class="layer flash" id="m03-flash"></div>
+      </div>
+      <script>
+        (function () {
+          const T0 = 12.9;
+          const S = '[data-composition-id="m03"] ';
+          const $ = (s) => document.querySelector(S + s);
+          const m = JS.flatMap($("#m03-svg"), { center: [114, 31], scale: 1250 });
+          const interp = d3.geoInterpolate(JS.cities.dhaka, JS.cities.tokyo);
+          const pts = d3.range(0, 1.0001, 0.01).map(interp);
+          const line = { type: "LineString", coordinates: pts };
+          JS.el("path", { d: m.path(line), fill: "none", stroke: "#f4a261", "stroke-opacity": "0.35", "stroke-width": "3", "stroke-dasharray": "2 12", "stroke-linecap": "round", "vector-effect": "non-scaling-stroke" }, m.top);
+          const route = JS.el("path", { id: "m03-route", d: m.path(line), fill: "none", stroke: "#f4a261", "stroke-width": "5", "stroke-linecap": "round", "vector-effect": "non-scaling-stroke" }, m.top);
+          const len = route.getTotalLength();
+          const r = JS.rng(77);
+          const clouds = $("#m03-clouds");
+          for (let i = 0; i < 7; i++) {
+            const c = document.createElement("div");
+            c.className = "cloud m03-cloud";
+            const w = 380 + r() * 420;
+            c.style.cssText = `left:${Math.floor(r() * 1700)}px;top:${Math.floor(120 + r() * 640)}px;width:${w}px;height:${w * 0.42}px`;
+            clouds.appendChild(c);
+          }
+          const prog = { t: 0 };
+          const km = $("#m03-km");
+          const dist = { v: 0 };
+          const place = () => {
+            m.apply();
+            [["#m03-dhaka", JS.cities.dhaka], ["#m03-tokyo", JS.cities.tokyo]].forEach(([p, ll]) => {
+              const xy = m.toScreen(m.proj(ll));
+              $(p).style.left = xy[0] + "px"; $(p).style.top = xy[1] + "px";
+            });
+            const a = route.getPointAtLength(len * prog.t), b = route.getPointAtLength(Math.min(len, len * prog.t + 2));
+            const pa = m.toScreen([a.x, a.y]), pb = m.toScreen([b.x, b.y]);
+            const ang = (Math.atan2(pb[1] - pa[1], pb[0] - pa[0]) * 180) / Math.PI;
+            const pl = $("#m03-plane");
+            pl.style.left = pa[0] + "px"; pl.style.top = pa[1] + "px";
+            pl.firstElementChild.style.transform = `rotate(${ang}deg)`;
+            km.textContent = Math.round(dist.v).toLocaleString("en-US");
+          };
+          const tl = gsap.timeline({ paused: true, onUpdate: place });
+          const kmT = JS.word("L07", "kilometers").e - T0;
+          tl.fromTo(m.camera, m.lookAt([100, 27], 1.35), { ...m.lookAt([112, 29], 1.0), duration: 1.6, ease: "power2.inOut" }, 0);
+          tl.to(m.camera, { ...m.lookAt([126, 32], 1.08), duration: 4.4, ease: "sine.inOut" }, 1.6);
+          tl.fromTo(route, { drawSVG: "0%" }, { drawSVG: "100%", duration: 6.2, ease: "sine.inOut" }, 0.4);
+          tl.fromTo(prog, { t: 0 }, { t: 1, duration: 6.2, ease: "sine.inOut" }, 0.4);
+          tl.fromTo($("#m03-plane"), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.4 }, 0.4);
+          tl.fromTo($("#m03-hud"), { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 0.3);
+          tl.fromTo(dist, { v: 0 }, { v: window.GEO.dhakaTokyoKm, duration: kmT - 1.0, ease: "power1.inOut" }, 1.0);
+          tl.fromTo($("#m03-bar"), { scaleX: 0 }, { scaleX: 1, duration: 6.2, ease: "sine.inOut" }, 0.4);
+          gsap.utils.toArray(S + ".m03-cloud").forEach((c, i) => tl.fromTo(c, { x: 200 + i * 40 }, { x: -500 - i * 60, duration: 7.3, ease: "none" }, 0));
+          // land: dive into Tokyo, wash to the cream "arrival" palette
+          tl.to(m.camera, { ...m.lookAt(JS.cities.tokyo, 4.5), duration: 0.7, ease: "power3.in" }, 6.6);
+          tl.to([$("#m03-hud"), $("#m03-plane"), $("#m03-dhaka")], { opacity: 0, duration: 0.3 }, 6.6);
+          tl.to($("#m03-flash"), { opacity: 1, duration: 0.25, ease: "power2.in" }, 7.02);
+          place();
+          window.__timelines["m03"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

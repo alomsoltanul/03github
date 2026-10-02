@@ -1,0 +1,37 @@
+{
+  "lead_in": 0.9,
+  "tail": 2.6,
+  "en_voice": "af_heart",
+  "en_speed": 0.92,
+  "phoneme_overrides": {
+    "ʃˈɪkaɪ": "ʃˈɪki",
+    "hˌɜːɹɐɡˈɑːnə": "hˌiːɹɑːɡˈɑːnə"
+  },
+  "lines": [
+    { "id": "L01", "text": "This is Dhaka.", "pause": 0.55 },
+    { "id": "L02", "text": "And you've made up your mind. Japan is next.", "pause": 0.95 },
+    { "id": "L03", "text": "Maybe it's work.", "pause": 0.35 },
+    { "id": "L04", "text": "Maybe it's a degree.", "pause": 0.35 },
+    { "id": "L05", "text": "Or a trip you've been saving up for.", "pause": 0.95 },
+    { "id": "L06", "text": "Getting there is the easy part.", "pause": 0.4 },
+    { "id": "L07", "text": "Almost five thousand kilometers. A few hours in the air.", "pause": 1.0 },
+    { "id": "L08", "text": "Then you land.", "pause": 0.45 },
+    { "id": "L09", "text": "And everything around you is in Japanese.", "pause": 0.5 },
+    { "id": "J01", "lang": "ja", "voice": "jf_alpha", "text": "次は、新宿です。", "en": "Next stop, Shinjuku.", "effect": "pa", "pre": 0.75, "pause": 0.45 },
+    { "id": "L10", "text": "The announcement on the train.", "pause": 0.35 },
+    { "id": "L11", "text": "The form at the city office.", "pause": 0.35 },
+    { "id": "L12", "text": "The first question in your job interview.", "pause": 0.4 },
+    { "id": "J02", "lang": "ja", "voice": "jm_kumo", "text": "自己紹介をお願いします。", "en": "Please introduce yourself.", "pause": 1.0 },
+    { "id": "L13", "text": "A ticket gets you to Japan.", "pause": 0.4 },
+    { "id": "L14", "text": "The language is what lets you live there.", "pause": 1.15 },
+    { "id": "L15", "text": "Japanese Shikhi teaches Japanese in Bangla, from your first hiragana to JLPT N1.", "pause": 0.5 },
+    { "id": "L16", "text": "Every grammar point is explained in Bangla.", "pause": 0.4 },
+    { "id": "L17", "text": "New words come back for review just before you'd forget them.", "pause": 0.4 },
+    { "id": "L18", "text": "And when you're ready, there's listening practice and timed mock exams.", "pause": 0.95 },
+    { "id": "L19", "text": "Going for work? Japan's skilled worker visa asks for N4, or an equivalent test.", "pause": 0.5 },
+    { "id": "L20", "text": "Going to study? Many universities that teach in Japanese expect N2.", "pause": 0.5 },
+    { "id": "L21", "text": "Travelling? Even the basics make each day easier.", "pause": 0.95 },
+    { "id": "L22", "text": "Wherever you're headed, start here. In Bangla.", "pause": 0.6 },
+    { "id": "J03", "lang": "ja", "voice": "jf_alpha", "text": "日本で会いましょう。", "en": "See you in Japan.", "pause": 0.0 }
+  ]
+}

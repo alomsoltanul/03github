@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        [data-composition-id="s10"] .bg { background: radial-gradient(ellipse at 22% 18%, #fde6cc 0%, #fff7ec 45%, #fbf3e8 100%); }
+        [data-composition-id="s10"] .sun { position: absolute; left: 460px; top: 150px; width: 230px; height: 230px; }
+        [data-composition-id="s10"] .sunc { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 36% 30%, #fbd29e, var(--sand) 55%, #e8893f 100%); box-shadow: 0 0 80px rgba(244, 162, 97, 0.55); display: flex; align-items: center; justify-content: center; }
+        [data-composition-id="s10"] .sunc .kanji { color: var(--red-deep); font-size: 128px; }
+        [data-composition-id="s10"] .rays { position: absolute; left: -60px; top: -60px; width: 350px; height: 350px; }
+        [data-composition-id="s10"] .ray { position: absolute; left: 167px; top: 0; width: 16px; height: 40px; border-radius: 8px; background: var(--sand); transform-origin: 8px 175px; }
+        [data-composition-id="s10"] .m1 { position: absolute; left: 380px; top: 470px; font-size: 76px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); }
+        [data-composition-id="s10"] .cup { position: absolute; left: 1260px; top: 420px; width: 230px; height: 210px; border: 10px solid var(--ink); border-top-width: 10px; border-radius: 12px 12px 90px 90px; background: #fff; display: flex; align-items: center; justify-content: center; }
+        [data-composition-id="s10"] .cup .kanji { font-size: 104px; color: var(--red); }
+        [data-composition-id="s10"] .handle { position: absolute; left: 1478px; top: 460px; width: 80px; height: 100px; border: 10px solid var(--ink); border-left: none; border-radius: 0 50px 50px 0; }
+        [data-composition-id="s10"] svg.steam { position: absolute; left: 1250px; top: 170px; width: 260px; height: 240px; overflow: visible; }
+        [data-composition-id="s10"] .clockt { position: absolute; left: 1262px; top: 230px; width: 240px; text-align: center; font-size: 96px; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); }
+        [data-composition-id="s10"] .m2 { position: absolute; left: 1210px; top: 670px; font-size: 92px; color: var(--red); }
+        [data-composition-id="s10"] .top { position: absolute; left: 0; right: 0; top: 100px; text-align: center; font-size: 62px; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; }
+        [data-composition-id="s10"] .top .serif { color: var(--red); font-size: 82px; font-weight: 400; margin-left: 10px; }
+        [data-composition-id="s10"] .phone { position: absolute; left: 720px; top: 240px; width: 480px; height: 940px; border-radius: 70px; background: #111; padding: 16px; box-shadow: 0 40px 90px rgba(60, 30, 10, 0.3); }
+        [data-composition-id="s10"] .screen { position: relative; width: 100%; height: 100%; border-radius: 56px; background: linear-gradient(180deg, #fff7ec 0%, #fde3c8 70%, #f9c99d 100%); overflow: hidden; }
+        [data-composition-id="s10"] .notch { position: absolute; left: 160px; top: 18px; width: 128px; height: 36px; border-radius: 20px; background: #111; }
+        [data-composition-id="s10"] .ptime { position: absolute; left: 0; right: 0; top: 76px; text-align: center; font-size: 130px; font-weight: 300; letter-spacing: -0.04em; color: var(--navy); }
+        [data-composition-id="s10"] .pday { position: absolute; left: 0; right: 0; top: 60px; text-align: center; font-size: 26px; font-weight: 600; color: var(--navy); opacity: 0.75; }
+        [data-composition-id="s10"] .nt { position: absolute; left: 22px; right: 22px; padding: 18px 18px; border-radius: 26px; background: rgba(255, 255, 255, 0.86); display: flex; align-items: center; gap: 16px; box-shadow: 0 8px 20px rgba(120, 60, 20, 0.1); }
+        [data-composition-id="s10"] .nt .ic { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: #fff; font-family: var(--jp); font-weight: 900; font-size: 32px; flex: none; }
+        [data-composition-id="s10"] .nt .tx { font-size: 23px; font-weight: 600; color: var(--ink); line-height: 1.25; }
+        [data-composition-id="s10"] .nt .tx small { display: block; font-size: 19px; font-weight: 500; color: var(--muted); }
+      </style>
+
+      <div id="root" data-composition-id="s10" data-width="1920" data-height="1080" data-duration="3.8">
+        <div class="layer bg"></div>
+
+        <div class="layer" id="s10-A">
+          <div class="sun" id="s10-sun">
+            <div class="rays" id="s10-rays"></div>
+            <div class="sunc"><div class="kanji">日</div></div>
+          </div>
+          <div class="m1" id="s10-m1">Every morning,</div>
+          <svg class="steam" viewBox="0 0 260 240">
+            <path class="s10-st" d="M60 230 C 30 190, 90 160, 60 120 S 70 50, 50 10" fill="none" stroke="#9a929f" stroke-width="10" stroke-linecap="round" />
+            <path class="s10-st" d="M130 230 C 100 190, 160 160, 130 120 S 140 50, 120 10" fill="none" stroke="#9a929f" stroke-width="10" stroke-linecap="round" />
+            <path class="s10-st" d="M200 230 C 170 190, 230 160, 200 120 S 210 50, 190 10" fill="none" stroke="#9a929f" stroke-width="10" stroke-linecap="round" />
+          </svg>
+          <div class="clockt" id="s10-702">7:02</div>
+          <div class="cup" id="s10-cup"><div class="kanji">茶</div></div>
+          <div class="handle" id="s10-handle"></div>
+          <div class="m2 serif" id="s10-m2">before chai.</div>
+        </div>
+
+        <div class="top" id="s10-top">you know <span class="serif">exactly</span> where you stand.</div>
+        <div class="phone" id="s10-phone">
+          <div class="screen">
+            <div class="notch"></div>
+            <div class="pday" style="top: 74px">Monday</div>
+            <div class="ptime" style="top: 104px">7:02</div>
+            <div class="nt s10-nt" style="top: 300px"><div class="ic" style="background:#e63946">火</div><div class="tx">47-day streak<small>keep it going today</small></div></div>
+            <div class="nt s10-nt" style="top: 412px"><div class="ic" style="background:#1d3557">復</div><div class="tx">12 words due<small>about 5 minutes</small></div></div>
+            <div class="nt s10-nt" style="top: 524px"><div class="ic" style="background:#2a9d8f">文</div><div class="tx">Today: 〜ながら<small>doing two things at once</small></div></div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          gsap.registerPlugin(DrawSVGPlugin);
+          const S = '[data-composition-id="s10"] ';
+          const $ = (s) => S + s;
+          const rays = document.querySelector($("#s10-rays"));
+          for (let i = 0; i < 12; i++) {
+            const r = document.createElement("div");
+            r.className = "ray s10-ray";
+            rays.appendChild(r);
+          }
+          const tl = gsap.timeline({ paused: true });
+          gsap.utils.toArray($(".s10-ray")).forEach((r, i) => tl.set(r, { rotation: i * 30 }, 0));
+          tl.set([$("#s10-top"), $("#s10-702")], { opacity: 0 }, 0);
+          tl.set($(".s10-st"), { drawSVG: "0%" }, 0);
+
+          // A — Every morning, before chai.
+          tl.fromTo($("#s10-sun"), { scale: 0, y: 80 }, { scale: 1, y: 0, duration: 0.55, ease: "back.out(1.6)" }, 0);
+          tl.fromTo($("#s10-rays"), { rotation: 0 }, { rotation: 60, duration: 3.8, ease: "none" }, 0);
+          tl.fromTo($("#s10-m1"), { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, 0.2);
+          tl.fromTo([$("#s10-cup"), $("#s10-handle")], { y: 300, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "back.out(1.5)" }, 0.35);
+          tl.to($(".s10-st"), { drawSVG: "100%", duration: 0.6, stagger: 0.1, ease: "power1.inOut" }, 0.7);
+          tl.fromTo($("#s10-m2"), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.75);
+          tl.to($(".s10-st"), { opacity: 0, y: -40, duration: 0.3 }, 1.2);
+          tl.fromTo($("#s10-702"), { opacity: 0, scale: 0.6, filter: "blur(10px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.35, ease: "back.out(2)" }, 1.2);
+
+          // B — you know exactly where you stand.
+          tl.to($("#s10-A"), { opacity: 0, scale: 0.94, duration: 0.3, ease: "power2.in" }, 1.85);
+          tl.fromTo($("#s10-top"), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 1.95);
+          tl.fromTo($("#s10-phone"), { y: 900 }, { y: 0, duration: 0.55, ease: "power3.out" }, 1.9);
+          tl.fromTo($(".s10-nt"), { opacity: 0, y: -24, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.3, stagger: 0.16, ease: "back.out(1.8)" }, 2.4);
+          tl.to($("#s10-phone"), { y: -20, duration: 1.0, ease: "sine.inOut" }, 2.6);
+          window.__timelines["s10"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

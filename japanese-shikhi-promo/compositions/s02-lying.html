@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        [data-composition-id="s02"] .bg { background: radial-gradient(ellipse at 50% 45%, #f0505c 0%, var(--red) 55%, #c92a37 100%); }
+        [data-composition-id="s02"] .ghost { position: absolute; right: 60px; top: 40px; font-size: 1000px; color: #fff; opacity: 0.09; }
+        [data-composition-id="s02"] .word { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-size: 330px; font-weight: 900; letter-spacing: -0.05em; color: var(--ink); line-height: 1; }
+        [data-composition-id="s02"] .to { position: absolute; left: 1010px; top: 670px; font-size: 140px; color: #fff; }
+        [data-composition-id="s02"] .shard { position: absolute; left: 930px; top: 520px; width: 70px; height: 70px; background: #fff; clip-path: polygon(0 0, 100% 40%, 30% 100%); }
+        [data-composition-id="s02"] .hole { position: absolute; left: 935px; top: 515px; width: 50px; height: 50px; border-radius: 50%; background: var(--cream); }
+      </style>
+
+      <div id="root" data-composition-id="s02" data-width="1920" data-height="1080" data-duration="1.6">
+        <div class="layer bg"></div>
+        <div class="ghost kanji" id="s02-ghost">嘘</div>
+        <div class="layer" id="s02-shards"></div>
+        <div class="word" id="s02-word">LYING.</div>
+        <div class="to serif" id="s02-to" data-layout-allow-overlap>to you.</div>
+        <div class="hole" id="s02-hole"></div>
+      </div>
+
+      <script>
+        (function () {
+          const S = '[data-composition-id="s02"] ';
+          const host = document.querySelector(S + "#s02-shards");
+          const dirs = [[-760, -330, 220], [-620, 260, -160], [700, -360, 200], [820, 210, -240], [-260, -420, 120], [380, 400, -140], [-900, 20, 300], [960, -60, -280], [120, -470, 180], [-420, 430, -200]];
+          dirs.forEach((d, i) => {
+            const el = document.createElement("div");
+            el.className = "shard";
+            el.style.transform = `scale(${0.6 + (i % 3) * 0.35})`;
+            host.appendChild(el);
+          });
+
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo(S + "#s02-word", { scale: 1.6, opacity: 0, filter: "blur(24px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.22, ease: "power4.out" }, 0);
+          tl.fromTo(S + "#s02-word", { x: 0 }, { x: 14, duration: 0.04, repeat: 5, yoyo: true, ease: "none" }, 0.22);
+          tl.fromTo(S + "#s02-ghost", { scale: 1.3, opacity: 0 }, { scale: 1, opacity: 0.09, duration: 0.5, ease: "power3.out" }, 0);
+          gsap.utils.toArray(S + ".shard").forEach((el, i) => {
+            const [dx, dy, r] = dirs[i];
+            tl.fromTo(el, { x: 0, y: 0, rotation: 0, opacity: 1 }, { x: dx, y: dy, rotation: r, opacity: 0.85, duration: 0.9, ease: "power3.out" }, 0.02);
+          });
+          tl.fromTo(S + "#s02-to", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 0.45);
+          // exit: shrink text, iris to cream for the next scene
+          tl.to([S + "#s02-word", S + "#s02-to", S + "#s02-ghost"], { scale: 0.85, opacity: 0, duration: 0.25, ease: "power2.in" }, 1.15);
+          tl.fromTo(S + "#s02-hole", { scale: 0 }, { scale: 48, duration: 0.42, ease: "power3.in" }, 1.18);
+
+          window.__timelines["s02"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

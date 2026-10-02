@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        [data-composition-id="s13"] .bg { background: radial-gradient(ellipse at 50% 40%, #ffffff 0%, var(--cream) 62%, #f3ece4 100%); }
+        [data-composition-id="s13"] .panel { position: absolute; left: 510px; top: 70px; width: 900px; height: 620px; border-radius: 34px; background: #fff; box-shadow: 0 34px 80px rgba(40, 20, 30, 0.12); padding: 34px 40px; }
+        [data-composition-id="s13"] .ph { display: flex; align-items: baseline; gap: 14px; font-size: 32px; font-weight: 800; color: var(--ink); margin-bottom: 26px; }
+        [data-composition-id="s13"] .ph span { font-size: 24px; font-weight: 600; color: var(--muted); }
+        [data-composition-id="s13"] .cm { display: flex; gap: 18px; align-items: flex-start; margin-bottom: 24px; }
+        [data-composition-id="s13"] .av { width: 60px; height: 60px; border-radius: 50%; flex: none; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 26px; font-weight: 800; }
+        [data-composition-id="s13"] .nm { font-size: 23px; font-weight: 700; color: var(--ink); }
+        [data-composition-id="s13"] .tx { font-size: 28px; font-weight: 500; color: #3f3a46; margin-top: 2px; }
+        [data-composition-id="s13"] .tx .k { font-family: var(--jp); font-weight: 900; color: var(--navy); }
+        [data-composition-id="s13"] .tx .hi { font-weight: 800; color: var(--red); }
+        [data-composition-id="s13"] .input { position: absolute; left: 40px; right: 40px; bottom: 30px; height: 76px; border-radius: 40px; background: #f4f1ee; display: flex; align-items: center; padding: 0 12px 0 30px; font-size: 26px; color: var(--muted); }
+        [data-composition-id="s13"] .input .typed { color: var(--ink); font-weight: 700; }
+        [data-composition-id="s13"] .send { position: absolute; right: 12px; top: 10px; width: 56px; height: 56px; border-radius: 50%; background: var(--red); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 800; }
+        [data-composition-id="s13"] .reply { position: absolute; left: 1180px; top: 300px; width: 600px; padding: 22px 26px; border-radius: 26px; background: var(--ink); color: #fff; display: flex; gap: 18px; align-items: center; box-shadow: 0 30px 60px rgba(22, 19, 32, 0.35); }
+        [data-composition-id="s13"] .reply img { width: 70px; height: 70px; border-radius: 18px; flex: none; }
+        [data-composition-id="s13"] .reply .t { font-size: 24px; font-weight: 800; }
+        [data-composition-id="s13"] .reply .b { font-size: 25px; font-weight: 500; color: #e5e7eb; margin-top: 4px; }
+        [data-composition-id="s13"] .reply .b b { color: var(--red-hi); }
+        [data-composition-id="s13"] .cta { position: absolute; left: 960px; top: 770px; height: 170px; padding: 0 70px; border-radius: 999px; background: var(--ink); color: #fff; display: flex; align-items: center; gap: 26px; white-space: nowrap; box-shadow: 0 30px 70px rgba(22, 19, 32, 0.35); }
+        [data-composition-id="s13"] .cta .c { font-size: 84px; font-weight: 800; letter-spacing: -0.02em; }
+        [data-composition-id="s13"] .cta .n { font-size: 96px; font-weight: 900; color: var(--red-hi); letter-spacing: -0.02em; }
+        [data-composition-id="s13"] .spark { position: absolute; left: 950px; top: 845px; width: 22px; height: 22px; border-radius: 50%; }
+        [data-composition-id="s13"] .url { position: absolute; left: 0; right: 0; top: 968px; text-align: center; font-size: 34px; font-weight: 700; color: var(--navy); letter-spacing: 0.01em; }
+      </style>
+
+      <div id="root" data-composition-id="s13" data-width="1920" data-height="1080" data-duration="5.2">
+        <div class="layer bg"></div>
+        <div class="layer" id="s13-dots"></div>
+        <div class="panel" id="s13-panel">
+          <div class="ph">Comments <span>1.2K</span></div>
+          <div class="cm s13-cm"><div class="av" style="background:#e63946">N</div><div><div class="nm">nusrat.studies</div><div class="tx">the <span class="k">忘</span> monster is literally me</div></div></div>
+          <div class="cm s13-cm"><div class="av" style="background:#1d3557">R</div><div><div class="nm">rafi_jlpt</div><div class="tx">N5 in December. I need this</div></div></div>
+          <div class="cm s13-cm"><div class="av" style="background:#2a9d8f">T</div><div><div class="nm">tanvir.codes</div><div class="tx">wait, this was made with AI?</div></div></div>
+          <div class="cm" id="s13-mine"><div class="av" style="background:#f4a261;color:#161320">Y</div><div><div class="nm">you</div><div class="tx"><span class="hi">N5</span></div></div></div>
+          <div class="input"><span id="s13-ph">Add a comment…</span><span class="typed" id="s13-typed"></span><div class="send" id="s13-send">↑</div></div>
+        </div>
+        <div class="reply" id="s13-reply">
+          <img src="assets/img/mark.png" alt="" />
+          <div><div class="t">Japanese Shikhi</div><div class="b">Sent you the link → <b>japaneseshikhi.com</b></div></div>
+        </div>
+        <div class="layer" id="s13-sparks"></div>
+        <div class="cta" id="s13-cta"><span class="c">Comment</span><span class="n">N5</span></div>
+        <div class="url" id="s13-url">japaneseshikhi.com</div>
+      </div>
+
+      <script>
+        (function () {
+          const S = '[data-composition-id="s13"] ';
+          const $ = (s) => S + s;
+          const dots = document.querySelector($("#s13-dots"));
+          [[120, 160, 30], [1780, 120, 22], [1720, 620, 34], [190, 700, 24], [320, 420, 14], [1600, 900, 18], [80, 980, 16]].forEach(([x, y, d]) => {
+            const el = document.createElement("div");
+            el.className = "dot s13-dot";
+            el.style.cssText = `left:${x}px;top:${y}px;width:${d}px;height:${d}px`;
+            dots.appendChild(el);
+          });
+          const colors = ["#e63946", "#f4a261", "#2a9d8f", "#1d3557", "#6b21a8", "#ff6b75"];
+          const sparks = document.querySelector($("#s13-sparks"));
+          const N = 26;
+          for (let i = 0; i < N; i++) {
+            const el = document.createElement("div");
+            el.className = "spark s13-spark";
+            el.style.background = colors[i % colors.length];
+            sparks.appendChild(el);
+          }
+          const typed = document.querySelector($("#s13-typed"));
+          const phEl = document.querySelector($("#s13-ph"));
+
+          const tl = gsap.timeline({ paused: true });
+          tl.set($("#s13-cta"), { xPercent: -50 }, 0);
+          tl.set([$("#s13-mine"), $("#s13-reply")], { opacity: 0 }, 0);
+          gsap.utils.toArray($(".s13-dot")).forEach((el, i) => {
+            tl.fromTo(el, { scale: 0 }, { scale: 1, duration: 0.35, ease: "back.out(3)" }, 0.1 + i * 0.04);
+            tl.fromTo(el, { y: 0 }, { y: i % 2 ? -24 : 24, duration: 5, ease: "sine.inOut" }, 0.1);
+          });
+          tl.fromTo($("#s13-panel"), { y: 60, opacity: 0, scale: 0.96 }, { y: 0, opacity: 1, scale: 1, duration: 0.45, ease: "power3.out" }, 0);
+          tl.fromTo($(".s13-cm"), { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.3, stagger: 0.1, ease: "power2.out" }, 0.15);
+
+          // CTA pill + burst
+          tl.fromTo($("#s13-cta"), { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(2)" }, 0.3);
+          const burst = (at, dist) => {
+            gsap.utils.toArray($(".s13-spark")).forEach((el, i) => {
+              const a = (i / N) * Math.PI * 2;
+              const r = dist * (0.7 + (i % 3) * 0.2);
+              tl.fromTo(el, { x: 0, y: 0, scale: 1, opacity: 1 }, { x: Math.cos(a) * r * 1.6, y: Math.sin(a) * r * 0.75, scale: 0.2, opacity: 0, duration: 0.8, ease: "power3.out" }, at);
+            });
+          };
+          tl.set($(".s13-spark"), { opacity: 0 }, 0);
+          burst(0.38, 330);
+          burst(2.2, 300);
+          tl.fromTo($("#s13-cta"), { y: 0 }, { y: -10, duration: 0.6, repeat: 3, yoyo: true, ease: "sine.inOut" }, 2.5);
+          tl.fromTo($("#s13-url"), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 0.7);
+
+          // the viewer types N5 and gets the link
+          const t = { p: 0 };
+          tl.fromTo(t, { p: 0 }, { p: 1, duration: 0.68, ease: "none", onUpdate: () => {
+            const n = t.p >= 1 ? 0 : Math.min(2, Math.round((t.p / 0.44) * 2));
+            typed.textContent = "N5".slice(0, n);
+            phEl.style.display = n ? "none" : "inline";
+          } }, 1.0);
+          tl.to($("#s13-send"), { scale: 0.85, duration: 0.08, yoyo: true, repeat: 1 }, 1.6);
+          tl.fromTo($("#s13-mine"), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(2)" }, 1.68);
+          tl.fromTo($("#s13-reply"), { opacity: 0, x: 140 }, { opacity: 1, x: 0, duration: 0.45, ease: "back.out(1.6)" }, 2.0);
+          window.__timelines["s13"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        [data-composition-id="s06"] .bg { background: linear-gradient(180deg, var(--navy-deep) 0%, #111c33 55%, #14213d 100%); }
+        [data-composition-id="s06"] .star { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: #fff; }
+        [data-composition-id="s06"] .top { position: absolute; left: 0; right: 0; top: 130px; text-align: center; color: #fff; font-size: 54px; font-weight: 600; letter-spacing: -0.01em; }
+        [data-composition-id="s06"] svg.waves { position: absolute; left: -200px; top: 640px; width: 2320px; height: 440px; }
+        [data-composition-id="s06"] .ball { left: 810px; top: 300px; width: 300px; height: 300px; }
+        [data-composition-id="s06"] .ball .n { font-size: 84px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+        [data-composition-id="s06"] .clock { position: absolute; left: 790px; top: 280px; width: 340px; height: 340px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #ffffff, #efe8df); box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.06), 0 0 90px rgba(244, 162, 97, 0.25); }
+        [data-composition-id="s06"] .tick { position: absolute; left: 167px; top: 14px; width: 6px; height: 22px; border-radius: 3px; background: var(--navy); transform-origin: 3px 156px; }
+        [data-composition-id="s06"] .hand { position: absolute; left: 165px; border-radius: 6px; background: var(--navy); transform-origin: 5px 100%; }
+        [data-composition-id="s06"] .hh { top: 80px; width: 10px; height: 90px; }
+        [data-composition-id="s06"] .mh { top: 40px; width: 8px; height: 130px; left: 166px; transform-origin: 4px 100%; }
+        [data-composition-id="s06"] .hub { position: absolute; left: 156px; top: 156px; width: 28px; height: 28px; border-radius: 50%; background: var(--red); }
+        [data-composition-id="s06"] .digital { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 96px; font-weight: 700; color: var(--navy); letter-spacing: -0.03em; }
+        [data-composition-id="s06"] .vert { position: absolute; left: 1220px; top: 300px; writing-mode: vertical-rl; font-family: var(--jp); font-weight: 900; font-size: 50px; letter-spacing: 14px; color: var(--sand); }
+        [data-composition-id="s06"] .bottom { position: absolute; left: 0; right: 0; top: 690px; text-align: center; color: #fff; font-size: 66px; font-weight: 600; }
+        [data-composition-id="s06"] .bottom .serif { color: var(--red-hi); font-size: 104px; margin-left: 14px; }
+      </style>
+
+      <div id="root" data-composition-id="s06" data-width="1920" data-height="1080" data-duration="2.8">
+        <div class="layer bg"></div>
+        <div class="layer" id="s06-stars"></div>
+        <svg class="waves" viewBox="0 0 2320 440" preserveAspectRatio="none">
+          <path id="s06-w1" d="M0 160 C 280 60, 520 260, 800 150 S 1320 40, 1600 170 S 2100 260, 2320 120 L 2320 440 L 0 440 Z" fill="#2a9d8f" opacity="0.28" />
+          <path id="s06-w2" d="M0 250 C 300 170, 560 330, 860 240 S 1400 150, 1700 260 S 2150 320, 2320 230 L 2320 440 L 0 440 Z" fill="#1d3557" opacity="0.9" />
+        </svg>
+        <div class="top" id="s06-top">And you only find out at</div>
+        <div class="ball" id="s06-ball"><div class="n">412</div></div>
+        <div class="clock" id="s06-clock">
+          <div id="s06-ticks"></div>
+          <div class="hand hh" id="s06-hh"></div>
+          <div class="hand mh" id="s06-mh"></div>
+          <div class="hub" id="s06-hub"></div>
+          <div class="digital" id="s06-dig">11:47</div>
+        </div>
+        <div class="vert" id="s06-vert">試験前夜</div>
+        <div class="bottom" id="s06-bottom">the night before<span class="serif">the exam.</span></div>
+      </div>
+
+      <script>
+        (function () {
+          const S = '[data-composition-id="s06"] ';
+          const $ = (s) => S + s;
+          const stars = document.querySelector($("#s06-stars"));
+          let seed = 7;
+          const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+          for (let i = 0; i < 46; i++) {
+            const el = document.createElement("div");
+            el.className = "star s06-star";
+            const sz = 2 + Math.floor(rnd() * 4);
+            el.style.cssText = `left:${Math.floor(rnd() * 1900)}px;top:${Math.floor(rnd() * 620)}px;width:${sz}px;height:${sz}px;opacity:${(0.3 + rnd() * 0.6).toFixed(2)}`;
+            stars.appendChild(el);
+          }
+          const ticks = document.querySelector($("#s06-ticks"));
+          for (let i = 0; i < 12; i++) {
+            const t = document.createElement("div");
+            t.className = "tick s06-tick";
+            ticks.appendChild(t);
+          }
+
+          const tl = gsap.timeline({ paused: true });
+          gsap.utils.toArray($(".s06-tick")).forEach((t, i) => tl.set(t, { rotation: i * 30, opacity: i % 3 ? 0.35 : 1 }, 0));
+          gsap.utils.toArray($(".s06-star")).forEach((el, i) => {
+            tl.fromTo(el, { scale: 0.4 }, { scale: 1.3, duration: 0.5 + (i % 5) * 0.12, repeat: 3, yoyo: true, ease: "sine.inOut" }, (i % 7) * 0.08);
+          });
+          tl.fromTo($("#s06-w1"), { x: 0 }, { x: -160, duration: 2.8, ease: "none" }, 0);
+          tl.fromTo($("#s06-w2"), { x: -120 }, { x: 40, duration: 2.8, ease: "none" }, 0);
+          tl.fromTo($("#s06-top"), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.05);
+
+          tl.fromTo($("#s06-ball"), { y: -600 }, { y: 0, duration: 0.4, ease: "power3.out" }, 0);
+          tl.to($("#s06-ball"), { scale: 0, duration: 0.25, ease: "power2.in" }, 0.5);
+          tl.fromTo($("#s06-clock"), { scale: 0, rotation: -40 }, { scale: 1, rotation: 0, duration: 0.45, ease: "back.out(1.7)" }, 0.6);
+          tl.set($("#s06-dig"), { opacity: 0 }, 0);
+          // 11:47 → hour hand 353.5°, minute hand 282°
+          tl.fromTo($("#s06-hh"), { rotation: 0 }, { rotation: 353.5 + 360, duration: 0.95, ease: "power3.out" }, 0.65);
+          tl.fromTo($("#s06-mh"), { rotation: 0 }, { rotation: 282 + 360 * 5, duration: 0.95, ease: "power3.out" }, 0.65);
+          tl.to([$("#s06-hh"), $("#s06-mh"), $("#s06-hub")], { opacity: 0, duration: 0.2 }, 1.55);
+          tl.to($(".s06-tick"), { opacity: 0.15, duration: 0.2 }, 1.55);
+          tl.fromTo($("#s06-dig"), { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, 1.55);
+          tl.fromTo($("#s06-vert"), { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 1.0);
+          tl.fromTo($("#s06-bottom"), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 1.25);
+
+          // exit: shrink to a point of light
+          tl.to([$("#s06-top"), $("#s06-bottom"), $("#s06-vert")], { opacity: 0, duration: 0.25, ease: "power2.in" }, 2.45);
+          tl.to($("#s06-clock"), { scale: 0.05, duration: 0.3, ease: "power3.in" }, 2.48);
+          window.__timelines["s06"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

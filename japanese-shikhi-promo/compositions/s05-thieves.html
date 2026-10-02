@@ -1,0 +1,199 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        [data-composition-id="s05"] .bg { background: radial-gradient(ellipse at 50% 45%, #ffffff 0%, var(--cream) 62%, #f3ece4 100%); }
+        [data-composition-id="s05"] .night { background: var(--navy-deep); opacity: 0; }
+        [data-composition-id="s05"] .corner { position: absolute; left: 70px; top: 60px; width: 54px; height: 54px; }
+        [data-composition-id="s05"] .cornertxt { position: absolute; left: 144px; top: 70px; font-size: 26px; font-weight: 600; color: var(--muted); }
+        [data-composition-id="s05"] .label { position: absolute; left: 0; right: 0; top: 130px; text-align: center; font-size: 66px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); }
+        [data-composition-id="s05"] .label .serif { font-size: 86px; color: var(--red); margin-left: 10px; letter-spacing: 0; }
+        [data-composition-id="s05"] .ballwrap { position: absolute; left: 760px; top: 330px; width: 400px; height: 400px; }
+        [data-composition-id="s05"] #s05-ball {
+          left: 0; top: 0; width: 400px; height: 400px; --bx: 0px; --by: 200px; --br: 0px;
+          -webkit-mask-image: radial-gradient(circle at var(--bx) var(--by), transparent var(--br), #000 calc(var(--br) + 1px));
+          mask-image: radial-gradient(circle at var(--bx) var(--by), transparent var(--br), #000 calc(var(--br) + 1px));
+        }
+        [data-composition-id="s05"] #s05-ball .n { font-size: 104px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+        [data-composition-id="s05"] #s05-ball .u { font-size: 32px; font-weight: 600; opacity: 0.9; margin-top: 6px; }
+        [data-composition-id="s05"] .minus { position: absolute; font-size: 92px; font-weight: 900; letter-spacing: -0.03em; }
+        [data-composition-id="s05"] .thief { position: absolute; display: flex; align-items: center; justify-content: center; }
+        [data-composition-id="s05"] .thief .kanji { color: #fff; position: relative; }
+        [data-composition-id="s05"] .eyes2 { position: absolute; width: 120px; height: 50px; }
+        [data-composition-id="s05"] .eyes2 .eye:first-child { left: 0; top: 0; }
+        [data-composition-id="s05"] .eyes2 .eye:last-child { left: 72px; top: 0; }
+        [data-composition-id="s05"] #s05-wasure { left: 400px; top: 400px; width: 250px; height: 250px; background: var(--navy); border-radius: 46% 54% 48% 52% / 52% 46% 54% 48%; box-shadow: 0 24px 50px rgba(29, 53, 87, 0.35); }
+        [data-composition-id="s05"] #s05-wasure .kanji { font-size: 140px; top: 18px; }
+        [data-composition-id="s05"] #s05-wasure .eyes2 { left: 66px; top: -24px; }
+        [data-composition-id="s05"] #s05-honoo { left: 1250px; top: 230px; width: 290px; height: 360px; }
+        [data-composition-id="s05"] #s05-honoo svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+        [data-composition-id="s05"] #s05-honoo .kanji { font-size: 120px; top: 70px; }
+        [data-composition-id="s05"] #s05-honoo .eyes2 { left: 86px; top: 128px; }
+        [data-composition-id="s05"] #s05-mayou { left: 1230px; top: 300px; width: 340px; height: 340px; }
+        [data-composition-id="s05"] #s05-mayou svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+        [data-composition-id="s05"] #s05-mayou .disk { position: absolute; left: 100px; top: 100px; width: 140px; height: 140px; border-radius: 50%; background: var(--teal); display: flex; align-items: center; justify-content: center; box-shadow: 0 16px 34px rgba(42, 157, 143, 0.4); }
+        [data-composition-id="s05"] #s05-mayou .kanji { font-size: 86px; }
+        [data-composition-id="s05"] .chip { position: absolute; left: 1300px; top: 680px; padding: 10px 26px; border-radius: 999px; background: #e3f3f1; color: var(--teal-deep); font-family: var(--jp); font-weight: 900; font-size: 44px; letter-spacing: 4px; }
+        [data-composition-id="s05"] #s05-mimi { left: 440px; top: 610px; width: 230px; height: 230px; background: var(--pro); border-radius: 56px; box-shadow: 0 24px 50px rgba(107, 33, 168, 0.35); }
+        [data-composition-id="s05"] #s05-mimi .kanji { font-size: 140px; top: 10px; }
+        [data-composition-id="s05"] #s05-mimi .eyes2 { left: 56px; top: -24px; }
+        [data-composition-id="s05"] .wave { position: absolute; border: 8px solid var(--pro); border-left-color: transparent; border-bottom-color: transparent; border-radius: 50%; }
+        [data-composition-id="s05"] .speed { position: absolute; height: 6px; border-radius: 6px; background: #d9d1c8; }
+      </style>
+
+      <div id="root" data-composition-id="s05" data-width="1920" data-height="1080" data-duration="8.2">
+        <div class="layer bg"></div>
+        <div class="ball corner" id="s05-corner"></div>
+        <div class="cornertxt">where'd the rest go?</div>
+        <div class="layer" id="s05-speed"></div>
+
+        <div class="label" id="s05-l1">Forgetting<span class="serif">ate</span></div>
+        <div class="label" id="s05-l2">Cramming<span class="serif">burned</span></div>
+        <div class="label" id="s05-l3">Look-alike kanji<span class="serif">took</span></div>
+        <div class="label" id="s05-l4">And<span class="serif">listening?</span></div>
+
+        <div class="ballwrap" id="s05-wrap">
+          <div class="ball" id="s05-ball">
+            <div class="n" id="s05-num">1,284</div>
+            <div class="u">words</div>
+          </div>
+        </div>
+
+        <!-- 忘 forget -->
+        <div class="thief" id="s05-wasure"><div class="kanji">忘</div><div class="eyes2"><div class="eye"></div><div class="eye"></div></div></div>
+        <div class="minus" id="s05-m1" style="left: 420px; top: 690px; color: var(--navy)">−386</div>
+
+        <!-- 炎 flame / burnout -->
+        <div class="thief" id="s05-honoo">
+          <svg viewBox="0 0 290 360">
+            <defs>
+              <linearGradient id="s05-flame" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#f4a261" />
+                <stop offset="0.45" stop-color="#d9692c" />
+                <stop offset="1" stop-color="#b4461b" />
+              </linearGradient>
+            </defs>
+            <path d="M145 0 C 170 70, 260 120, 270 220 C 280 300, 220 360, 145 360 C 70 360, 10 300, 20 220 C 28 160, 70 140, 80 90 C 105 130, 110 150, 118 170 C 128 110, 120 60, 145 0 Z" fill="url(#s05-flame)" />
+          </svg>
+          <div class="kanji">炎</div>
+          <div class="eyes2"><div class="eye"></div><div class="eye"></div></div>
+        </div>
+        <div class="minus" id="s05-m2" style="left: 1310px; top: 620px; color: var(--sand-deep)">−274</div>
+
+        <!-- 迷 lost / confused (look-alike kanji) -->
+        <div class="thief" id="s05-mayou">
+          <svg viewBox="0 0 340 340" id="s05-spiral">
+            <path d="M170 170 m 0 -20 a 20 20 0 1 1 -1 0 m 1 -26 a 46 46 0 1 1 -2 0 m 2 -28 a 74 74 0 1 1 -3 0 m 3 -28 a 102 102 0 1 1 -4 0 m 4 -28 a 130 130 0 1 1 -5 0" fill="none" stroke="#2a9d8f" stroke-width="10" stroke-linecap="round" opacity="0.55" />
+          </svg>
+          <div class="disk"><div class="kanji">迷</div></div>
+        </div>
+        <div class="chip" id="s05-chip">未 ≠ 末</div>
+        <div class="minus" id="s05-m3" style="left: 1590px; top: 420px; color: var(--teal-deep)">−112</div>
+
+        <!-- 耳 ear / listening -->
+        <div class="thief" id="s05-mimi"><div class="kanji">耳</div><div class="eyes2"><div class="eye"></div><div class="eye"></div></div></div>
+        <div class="wave s05-wave" style="left: 690px; top: 680px; width: 60px; height: 60px"></div>
+        <div class="wave s05-wave" style="left: 690px; top: 650px; width: 110px; height: 110px"></div>
+        <div class="minus" id="s05-m4" style="left: 230px; top: 470px; color: var(--pro)">−100</div>
+
+        <div class="layer night" id="s05-night"></div>
+      </div>
+
+      <script>
+        (function () {
+          const S = '[data-composition-id="s05"] ';
+          const $ = (s) => S + s;
+          const speed = document.querySelector($("#s05-speed"));
+          [[250, 340], [330, 220], [420, 420], [520, 260], [610, 380], [700, 240], [800, 300], [880, 200]].forEach(([y, w]) => {
+            const el = document.createElement("div");
+            el.className = "speed";
+            el.style.cssText = `top:${y}px;left:960px;width:${w}px;opacity:0`;
+            speed.appendChild(el);
+          });
+
+          const tl = gsap.timeline({ paused: true });
+          const num = document.querySelector($("#s05-num"));
+          const c = { v: 1284 };
+          const count = (to, at) => tl.to(c, { v: to, duration: 0.45, ease: "power2.out", onUpdate: () => (num.textContent = Math.round(c.v).toLocaleString("en-US")) }, at);
+          const label = (id, a, b) => {
+            tl.fromTo($(id), { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, a);
+            tl.to($(id), { opacity: 0, y: -20, duration: 0.25, ease: "power2.in" }, b);
+          };
+          const bite = (bx, by, at, scaleTo) => {
+            tl.set($("#s05-ball"), { "--bx": bx + "px", "--by": by + "px", "--br": "0px" }, at - 0.01);
+            tl.to($("#s05-ball"), { "--br": "112px", duration: 0.14, ease: "power3.out" }, at);
+            tl.to($("#s05-wrap"), { x: bx < 200 ? 14 : -14, duration: 0.07, yoyo: true, repeat: 1, ease: "none" }, at);
+            tl.to($("#s05-ball"), { "--br": "0px", duration: 0.5, ease: "power2.inOut" }, at + 0.55);
+            tl.to($("#s05-wrap"), { scale: scaleTo, duration: 0.5, ease: "power2.inOut" }, at + 0.55);
+          };
+          const minus = (id, at, dy) => tl.fromTo($(id), { opacity: 0, scale: 0.6, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: 0.3, ease: "back.out(2.5)" }, at);
+
+          tl.set([$(".label"), $(".minus"), $("#s05-chip")], { opacity: 0 }, 0);
+          tl.fromTo($("#s05-wrap"), { scale: 0.85 }, { scale: 1, duration: 0.4, ease: "back.out(2)" }, 0);
+          tl.fromTo($(".cornertxt"), { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.1);
+
+          // 1 — 忘 Forgetting ate −386
+          label("#s05-l1", 0.1, 1.85);
+          tl.fromTo($("#s05-wasure"), { x: -700, rotation: -20 }, { x: 0, rotation: 0, duration: 0.55, ease: "back.out(1.6)" }, 0.1);
+          tl.to($("#s05-wasure"), { x: 120, scaleX: 1.12, scaleY: 0.9, duration: 0.12, ease: "power2.in" }, 0.88);
+          tl.to($("#s05-wasure"), { x: 0, scaleX: 1, scaleY: 1, duration: 0.3, ease: "back.out(2)" }, 1.02);
+          bite(0, 210, 0.95, 0.92);
+          minus("#s05-m1", 1.05);
+          count(898, 1.05);
+          tl.to([$("#s05-wasure"), $("#s05-m1")], { x: -700, opacity: 0, duration: 0.4, ease: "power2.in" }, 1.7);
+
+          // 2 — 炎 Cramming burned −274
+          gsap.utils.toArray($(".speed")).forEach((el, i) => {
+            tl.fromTo(el, { x: 900, opacity: 0 }, { x: -200, opacity: 0.9, duration: 0.3, ease: "power2.out" }, 2.0 + i * 0.02);
+            tl.to(el, { x: -900, opacity: 0, duration: 0.3, ease: "power2.in" }, 2.3 + i * 0.02);
+          });
+          label("#s05-l2", 2.05, 3.85);
+          tl.fromTo($("#s05-honoo"), { x: 800 }, { x: 0, duration: 0.45, ease: "power3.out" }, 2.05);
+          tl.fromTo($("#s05-honoo svg"), { scaleY: 1, transformOrigin: "50% 100%" }, { scaleY: 1.08, duration: 0.12, repeat: 13, yoyo: true, ease: "sine.inOut" }, 2.1);
+          tl.to($("#s05-honoo"), { x: -110, y: 40, duration: 0.12, ease: "power2.in" }, 2.88);
+          tl.to($("#s05-honoo"), { x: 0, y: 0, duration: 0.3, ease: "back.out(2)" }, 3.02);
+          bite(380, 90, 2.95, 0.84);
+          minus("#s05-m2", 3.05);
+          count(624, 3.05);
+          tl.to([$("#s05-honoo"), $("#s05-m2")], { x: 800, opacity: 0, duration: 0.4, ease: "power2.in" }, 3.7);
+
+          // 3 — 迷 Look-alike kanji took −112
+          label("#s05-l3", 4.05, 5.85);
+          tl.fromTo($("#s05-mayou"), { scale: 0, rotation: -180 }, { scale: 1, rotation: 0, duration: 0.5, ease: "back.out(1.6)" }, 4.05);
+          tl.fromTo($("#s05-spiral"), { rotation: 0 }, { rotation: -720, duration: 1.9, ease: "none" }, 4.05);
+          tl.fromTo($("#s05-chip"), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 4.4);
+          tl.to($("#s05-mayou"), { x: -90, duration: 0.15, ease: "power2.in" }, 4.88);
+          tl.to($("#s05-mayou"), { x: 0, duration: 0.3, ease: "back.out(2)" }, 5.03);
+          bite(400, 250, 4.95, 0.79);
+          minus("#s05-m3", 5.05);
+          count(512, 5.05);
+          tl.to([$("#s05-mayou"), $("#s05-chip"), $("#s05-m3")], { scale: 0, opacity: 0, duration: 0.35, ease: "power2.in" }, 5.65);
+
+          // 4 — 耳 And listening? −100
+          label("#s05-l4", 6.05, 7.5);
+          tl.fromTo($("#s05-mimi"), { y: 600, rotation: 15 }, { y: 0, rotation: 0, duration: 0.5, ease: "back.out(1.5)" }, 6.05);
+          gsap.utils.toArray($(".s05-wave")).forEach((el, i) => {
+            tl.fromTo(el, { opacity: 0, scale: 0.6, rotation: 45 }, { opacity: 1, scale: 1.1, rotation: 45, duration: 0.35, repeat: 2, yoyo: true, ease: "sine.inOut" }, 6.4 + i * 0.12);
+          });
+          tl.to($("#s05-mimi"), { x: 70, y: -70, duration: 0.12, ease: "power2.in" }, 6.88);
+          tl.to($("#s05-mimi"), { x: 0, y: 0, duration: 0.3, ease: "back.out(2)" }, 7.02);
+          bite(70, 360, 6.95, 0.74);
+          minus("#s05-m4", 7.05);
+          count(412, 7.05);
+
+          // exit — everything whooshes right into the night
+          gsap.utils.toArray($(".speed")).forEach((el, i) => {
+            tl.fromTo(el, { x: -900, opacity: 0 }, { x: 300, opacity: 0.9, duration: 0.3, ease: "power2.out" }, 7.6 + i * 0.02);
+          });
+          tl.to([$("#s05-wrap"), $("#s05-mimi"), $("#s05-m4"), $(".s05-wave")], { x: 1500, duration: 0.45, ease: "power3.in" }, 7.65);
+          tl.to($("#s05-night"), { opacity: 1, duration: 0.3, ease: "power1.in" }, 7.9);
+
+          window.__timelines["s05"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

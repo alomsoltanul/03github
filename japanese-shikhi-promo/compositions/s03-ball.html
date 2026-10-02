@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        [data-composition-id="s03"] .bg { background: radial-gradient(ellipse at 50% 40%, #ffffff 0%, var(--cream) 60%, #f3ece4 100%); }
+        [data-composition-id="s03"] .top { position: absolute; left: 0; right: 0; top: 150px; height: 120px; text-align: center; font-size: 58px; font-weight: 600; color: var(--ink); letter-spacing: -0.02em; }
+        [data-composition-id="s03"] .top .serif { color: var(--red); font-size: 84px; margin: 0 6px; }
+        [data-composition-id="s03"] .top > div { position: absolute; left: 0; right: 0; top: 0; }
+        [data-composition-id="s03"] .bottom { position: absolute; left: 0; right: 0; top: 800px; text-align: center; font-size: 96px; color: var(--red); }
+        [data-composition-id="s03"] .ballwrap { position: absolute; left: 750px; top: 330px; width: 420px; height: 420px; }
+        [data-composition-id="s03"] .ball { left: 0; top: 0; width: 420px; height: 420px; }
+        [data-composition-id="s03"] .ball .n { font-size: 112px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+        [data-composition-id="s03"] .ball .u { font-size: 34px; font-weight: 600; opacity: 0.9; margin-top: 6px; }
+        [data-composition-id="s03"] .drip { position: absolute; left: 170px; top: 340px; width: 80px; height: 240px; border-radius: 0 0 30px 30px; background: linear-gradient(#c92a37, var(--red)); transform-origin: 50% 0%; }
+        [data-composition-id="s03"] .drop { position: absolute; left: 186px; top: 520px; width: 48px; height: 56px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; background: var(--red); }
+        [data-composition-id="s03"] .puddle { position: absolute; left: 660px; top: 880px; width: 600px; height: 56px; border-radius: 50%; background: radial-gradient(ellipse at 50% 40%, #f0505c, #c92a37); }
+        [data-composition-id="s03"] .eyes { position: absolute; left: 125px; top: 46px; width: 170px; height: 60px; }
+        [data-composition-id="s03"] .eye.l { left: 0; top: 0; }
+        [data-composition-id="s03"] .eye.r { left: 110px; top: 0; }
+        [data-composition-id="s03"] .sigh { position: absolute; left: 1230px; top: 420px; font-family: var(--jp-sans); font-weight: 700; font-size: 64px; color: #8a8392; }
+        [data-composition-id="s03"] .sigh small { display: block; font-family: var(--sans); font-weight: 500; font-size: 30px; color: var(--muted); margin-top: 6px; }
+      </style>
+
+      <div id="root" data-composition-id="s03" data-width="1920" data-height="1080" data-duration="5.4">
+        <div class="layer bg"></div>
+        <div class="layer" id="s03-dots"></div>
+        <div class="top">
+          <div id="s03-t1">It says you know</div>
+          <div id="s03-t2">You <span class="serif">actually</span> remember</div>
+        </div>
+        <div class="puddle" id="s03-puddle"></div>
+        <div class="ballwrap" id="s03-wrap">
+          <div class="drip" id="s03-drip"></div>
+          <div class="drop" id="s03-drop"></div>
+          <div class="ball" id="s03-ball">
+            <div class="n" id="s03-num">1,284</div>
+            <div class="u">words</div>
+            <div class="eyes" id="s03-eyes"><div class="eye l"></div><div class="eye r"></div></div>
+          </div>
+        </div>
+        <div class="bottom serif" id="s03-bottom">by heart.</div>
+        <div class="sigh" id="s03-sigh">はぁ…<small>(sigh)</small></div>
+      </div>
+
+      <script>
+        (function () {
+          const S = '[data-composition-id="s03"] ';
+          const dots = document.querySelector(S + "#s03-dots");
+          [[140, 180, 26], [1760, 240, 18], [1680, 880, 30], [230, 900, 20], [420, 520, 12], [1500, 560, 14], [980, 120, 10]].forEach(([x, y, d]) => {
+            const el = document.createElement("div");
+            el.className = "dot s03-dot";
+            el.style.cssText = `left:${x}px;top:${y}px;width:${d}px;height:${d}px;opacity:.85`;
+            dots.appendChild(el);
+          });
+
+          const tl = gsap.timeline({ paused: true });
+          const num = document.querySelector(S + "#s03-num");
+          const c = { v: 1284 };
+
+          gsap.utils.toArray(S + ".s03-dot").forEach((el, i) => {
+            tl.fromTo(el, { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(3)" }, 0.1 + i * 0.05);
+            tl.fromTo(el, { y: 0 }, { y: i % 2 ? -26 : 26, duration: 5.2, ease: "sine.inOut" }, 0.1);
+          });
+
+          // A: "It says you know 1,284 words by heart."
+          tl.fromTo(S + "#s03-ball", { scale: 0 }, { scale: 1, duration: 0.55, ease: "back.out(1.8)" }, 0.1);
+          tl.fromTo(S + "#s03-t1", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.05);
+          tl.fromTo(S + "#s03-bottom", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 0.9);
+          tl.set(S + "#s03-t2", { opacity: 0 }, 0);
+          tl.set([S + "#s03-eyes", S + "#s03-sigh"], { opacity: 0 }, 0);
+          tl.set(S + "#s03-drip", { scaleY: 0 }, 0);
+          tl.set(S + "#s03-drop", { opacity: 0 }, 0);
+          tl.set(S + "#s03-puddle", { scaleX: 0, opacity: 0 }, 0);
+
+          // B: "You actually remember 412" — the ball melts
+          tl.to([S + "#s03-t1", S + "#s03-bottom"], { opacity: 0, y: -20, duration: 0.3, ease: "power2.in" }, 1.9);
+          tl.fromTo(S + "#s03-t2", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 2.05);
+          tl.fromTo(c, { v: 1284 }, { v: 412, duration: 0.9, ease: "power2.inOut", onUpdate: () => (num.textContent = Math.round(c.v).toLocaleString("en-US")) }, 2.1);
+          tl.to(S + "#s03-wrap", { scale: 0.74, y: 70, duration: 0.9, ease: "power2.inOut" }, 2.1);
+          tl.to(S + "#s03-ball", { scaleY: 0.9, scaleX: 1.06, transformOrigin: "50% 100%", duration: 0.6, ease: "sine.inOut" }, 2.3);
+          tl.to(S + "#s03-drip", { scaleY: 1, duration: 0.7, ease: "power2.in" }, 2.4);
+          tl.to(S + "#s03-puddle", { scaleX: 1, opacity: 1, duration: 0.6, ease: "power2.out" }, 2.9);
+
+          // C: eyes + sigh, drops keep falling
+          tl.to(S + "#s03-eyes", { opacity: 1, duration: 0.15 }, 3.05);
+          tl.fromTo(S + "#s03-eyes", { scaleY: 1 }, { scaleY: 0.1, duration: 0.07, repeat: 1, yoyo: true, ease: "none" }, 3.7);
+          tl.fromTo(S + "#s03-sigh", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, 3.2);
+          tl.fromTo(S + "#s03-drop", { y: 0, opacity: 1 }, { y: 360, opacity: 1, duration: 0.45, ease: "power2.in" }, 3.0);
+          tl.fromTo(S + "#s03-drop", { y: 0 }, { y: 360, duration: 0.45, ease: "power2.in" }, 3.6);
+          tl.to(S + "#s03-drip", { scaleY: 0.55, duration: 0.6, ease: "sine.inOut" }, 3.4);
+
+          // D: hop and drop out of frame
+          tl.to(S + "#s03-sigh", { opacity: 0, duration: 0.2 }, 4.45);
+          tl.to(S + "#s03-wrap", { y: -60, duration: 0.25, ease: "power2.out" }, 4.55);
+          tl.to(S + "#s03-wrap", { y: 1100, duration: 0.5, ease: "power3.in" }, 4.8);
+          tl.to(S + "#s03-puddle", { scaleX: 0, opacity: 0, duration: 0.4, ease: "power2.in" }, 4.9);
+          tl.to(S + "#s03-t2", { opacity: 0, duration: 0.25 }, 5.05);
+
+          window.__timelines["s03"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

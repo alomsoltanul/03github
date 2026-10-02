@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        [data-composition-id="s11"] .bg { background: radial-gradient(ellipse at 50% 45%, #ffffff 0%, var(--cream) 62%, #f3ece4 100%); }
+        [data-composition-id="s11"] .night { background: linear-gradient(180deg, #0b1220 0%, #1d3557 70%, #2b4a74 100%); }
+        [data-composition-id="s11"] .tab { position: absolute; display: flex; align-items: center; gap: 12px; padding: 12px 22px 12px 14px; border-radius: 14px; background: #fff; border: 1px solid #e7e1da; font-size: 24px; font-weight: 600; color: var(--ink); box-shadow: 0 14px 30px rgba(40, 20, 30, 0.1); white-space: nowrap; }
+        [data-composition-id="s11"] .tab i { display: block; width: 26px; height: 26px; border-radius: 7px; }
+        [data-composition-id="s11"] .h { position: absolute; left: 0; right: 0; top: 360px; text-align: center; font-size: 180px; font-weight: 900; letter-spacing: -0.05em; color: var(--ink); line-height: 1; }
+        [data-composition-id="s11"] .h2 { position: absolute; left: 0; right: 0; top: 580px; text-align: center; font-size: 170px; color: var(--sand); line-height: 1; }
+        [data-composition-id="s11"] .moon { position: absolute; left: 1390px; top: 110px; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle at 36% 30%, #fde3c2, var(--sand) 70%); box-shadow: 0 0 90px rgba(244, 162, 97, 0.6); display: flex; align-items: center; justify-content: center; }
+        [data-composition-id="s11"] .moon .kanji { font-size: 116px; color: var(--navy); }
+        [data-composition-id="s11"] .zz { position: absolute; color: var(--sand); }
+        [data-composition-id="s11"] .star { position: absolute; border-radius: 50%; background: #fff; }
+        [data-composition-id="s11"] svg.waves { position: absolute; left: -100px; top: 820px; width: 2120px; height: 260px; }
+      </style>
+
+      <div id="root" data-composition-id="s11" data-width="1920" data-height="1080" data-duration="2">
+        <div class="layer bg"></div>
+        <div class="layer" id="s11-tabs" data-layout-allow-overlap></div>
+        <div class="layer night" id="s11-night">
+          <div class="layer" id="s11-stars"></div>
+          <svg class="waves" viewBox="0 0 2120 260" preserveAspectRatio="none">
+            <path id="s11-w1" d="M0 120 C 260 40, 520 200, 800 110 S 1320 30, 1600 130 S 1980 190, 2120 90 L 2120 260 L 0 260 Z" fill="#ffffff" opacity="0.08" />
+            <path id="s11-w2" d="M0 190 C 300 120, 560 250, 860 180 S 1400 110, 1700 200 S 2000 240, 2120 170 L 2120 260 L 0 260 Z" fill="#ffffff" opacity="0.1" />
+          </svg>
+          <div class="moon" id="s11-moon"><div class="kanji">月</div></div>
+          <div class="zz kanji s11-z" style="left: 1610px; top: 250px; font-size: 40px">眠</div>
+          <div class="zz kanji s11-z" style="left: 1665px; top: 175px; font-size: 56px">眠</div>
+          <div class="zz kanji s11-z" style="left: 1740px; top: 85px; font-size: 72px">眠</div>
+        </div>
+        <div class="h" id="s11-h" data-layout-allow-overlap>Fewer tabs.</div>
+        <div class="h2 serif" id="s11-h2">More sleep.</div>
+      </div>
+
+      <script>
+        (function () {
+          const S = '[data-composition-id="s11"] ';
+          const $ = (s) => S + s;
+          const tabs = [[-420, 160, "#e63946"], [2000, 210, "#2a9d8f"], [-380, 520, "#f4a261"], [2050, 560, "#1d3557"], [-300, 880, "#6b21a8"], [1980, 900, "#e63946"], [700, -120, "#2563eb"], [1100, 1140, "#15803d"]];
+          const labels = ["Grammar PDF", "Flashcards", "Kanji chart", "Dictionary", "Listening mp3s", "Mock test.pdf", "notes_v3", "Vocab sheet"];
+          const host = document.querySelector($("#s11-tabs"));
+          tabs.forEach(([x, y, c], i) => {
+            const el = document.createElement("div");
+            el.className = "tab s11-tab";
+            el.style.left = x + "px";
+            el.style.top = y + "px";
+            el.innerHTML = `<i style="background:${c}"></i>${labels[i]}`;
+            host.appendChild(el);
+          });
+          const stars = document.querySelector($("#s11-stars"));
+          let seed = 11;
+          const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+          for (let i = 0; i < 40; i++) {
+            const el = document.createElement("div");
+            el.className = "star s11-star";
+            const sz = 2 + Math.floor(rnd() * 4);
+            el.style.cssText = `left:${Math.floor(rnd() * 1900)}px;top:${Math.floor(rnd() * 760)}px;width:${sz}px;height:${sz}px;opacity:${(0.3 + rnd() * 0.6).toFixed(2)}`;
+            stars.appendChild(el);
+          }
+
+          const tl = gsap.timeline({ paused: true });
+          tl.set($("#s11-night"), { clipPath: "inset(0% 0% 100% 0%)" }, 0);
+          tl.set($("#s11-h2"), { opacity: 0 }, 0);
+          tl.fromTo($("#s11-h"), { opacity: 0, scale: 1.15 }, { opacity: 1, scale: 1, duration: 0.3, ease: "power3.out" }, 0);
+          gsap.utils.toArray($(".s11-tab")).forEach((el, i) => {
+            const [x, y] = tabs[i];
+            const tx = 860 - x, ty = 470 - y;
+            tl.fromTo(el, { x: 0, y: 0, opacity: 1, rotation: (i % 2 ? 1 : -1) * 20 }, { x: tx * 0.62, y: ty * 0.62, rotation: (i % 2 ? 1 : -1) * 6, duration: 0.4, ease: "power3.out" }, i * 0.03);
+            tl.to(el, { x: tx, y: ty, scale: 0, opacity: 0, duration: 0.25, ease: "power3.in" }, 0.5 + i * 0.02);
+          });
+          tl.to($("#s11-h"), { scale: 1.06, duration: 0.12, yoyo: true, repeat: 1 }, 0.75);
+
+          // night falls
+          tl.to($("#s11-night"), { clipPath: "inset(0% 0% 0% 0%)", duration: 0.4, ease: "power3.inOut" }, 0.9);
+          tl.to($("#s11-h"), { color: "#ffffff", y: -60, duration: 0.4, ease: "power3.inOut" }, 0.9);
+          tl.fromTo($("#s11-moon"), { y: 120, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 1.05);
+          gsap.utils.toArray($(".s11-z")).forEach((el, i) => {
+            tl.fromTo(el, { opacity: 0, y: 30 }, { opacity: 0.9, y: -10, duration: 0.45, ease: "power2.out" }, 1.25 + i * 0.12);
+          });
+          gsap.utils.toArray($(".s11-star")).forEach((el, i) => tl.fromTo(el, { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, 1.0 + (i % 10) * 0.03));
+          tl.fromTo($("#s11-w1"), { x: 0 }, { x: -120, duration: 1.1, ease: "none" }, 0.9);
+          tl.fromTo($("#s11-w2"), { x: -100 }, { x: 20, duration: 1.1, ease: "none" }, 0.9);
+          tl.fromTo($("#s11-h2"), { opacity: 0, y: 40 }, { opacity: 1, y: -60, duration: 0.45, ease: "power2.out" }, 1.15);
+          window.__timelines["s11"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

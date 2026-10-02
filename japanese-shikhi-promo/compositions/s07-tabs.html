@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        [data-composition-id="s07"] .bg { background: radial-gradient(ellipse at 50% 50%, #17223a 0%, var(--navy-deep) 70%); }
+        [data-composition-id="s07"] .stage { perspective: 1300px; }
+        [data-composition-id="s07"] .tab {
+          position: absolute; display: flex; align-items: center; gap: 14px; padding: 14px 24px 14px 16px; border-radius: 16px;
+          background: #1f2937; border: 1px solid #334155; color: #e5e7eb; font-size: 26px; font-weight: 500; white-space: nowrap;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+        }
+        [data-composition-id="s07"] .fav { width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800; color: #fff; }
+        [data-composition-id="s07"] .x { color: #64748b; margin-left: 6px; font-size: 22px; }
+        [data-composition-id="s07"] .head { position: absolute; left: 0; right: 0; top: 410px; display: flex; align-items: baseline; justify-content: center; gap: 28px; }
+        [data-composition-id="s07"] .n14 { font-size: 240px; font-weight: 900; color: var(--red-hi); letter-spacing: -0.05em; line-height: 1; }
+        [data-composition-id="s07"] .tabs { font-size: 210px; font-weight: 900; color: #fff; letter-spacing: -0.04em; line-height: 1; }
+        [data-composition-id="s07"] .open { font-size: 190px; color: var(--red-hi); line-height: 1; }
+        [data-composition-id="s07"] .comet { position: absolute; left: 0; top: 0; width: 620px; height: 12px; border-radius: 12px; background: linear-gradient(90deg, rgba(244, 162, 97, 0), #f4a261 70%, #fff); box-shadow: 0 0 30px #f4a261; transform-origin: 100% 50%; }
+        [data-composition-id="s07"] .flash { position: absolute; left: 935px; top: 515px; width: 50px; height: 50px; border-radius: 50%; background: #fff; }
+      </style>
+
+      <div id="root" data-composition-id="s07" data-width="1920" data-height="1080" data-duration="2">
+        <div class="layer bg"></div>
+        <div class="layer stage" id="s07-stage" data-layout-allow-overlap></div>
+        <div class="head" id="s07-head" data-layout-allow-overlap>
+          <span class="n14" id="s07-n" data-layout-allow-overlap>1</span><span class="tabs" data-layout-allow-overlap>TABS</span><span class="open serif" data-layout-allow-overlap>open.</span>
+        </div>
+        <div class="comet" id="s07-comet"></div>
+        <div class="flash" id="s07-flash"></div>
+      </div>
+
+      <script>
+        (function () {
+          const S = '[data-composition-id="s07"] ';
+          const $ = (s) => S + s;
+          const tabs = [
+            ["Grammar PDF — p.47", "#e63946", "P", 120, 120, -14],
+            ["Old flashcard deck", "#2a9d8f", "F", 760, 70, 10],
+            ["Kanji chart.png", "#f4a261", "漢", 1330, 130, -8],
+            ["Video: て-form explained", "#b91c1c", "▶", 90, 300, 12],
+            ["Dictionary", "#1d3557", "D", 1480, 290, -12],
+            ["Mock test 2019.pdf", "#e63946", "P", 60, 690, -10],
+            ["notes_final_v3.docx", "#2563eb", "W", 1390, 700, 14],
+            ["Listening mp3s", "#6b21a8", "♪", 300, 860, 8],
+            ["Forum: is N4 hard?", "#ea580c", "?", 1080, 860, -9],
+            ["Vocab sheet.xlsx", "#15803d", "X", 640, 930, 11],
+            ["Bangla–JP dictionary", "#1d3557", "অ", 1500, 520, 9],
+            ["Counters (〜本 〜枚)", "#2a9d8f", "数", 80, 500, -7],
+            ["Keigo cheat sheet", "#f4a261", "敬", 640, 210, 6],
+            ["Past paper answers", "#e63946", "P", 1120, 240, -11],
+          ];
+          const stage = document.querySelector($("#s07-stage"));
+          tabs.forEach(([t, c, f, x, y]) => {
+            const el = document.createElement("div");
+            el.className = "tab s07-tab";
+            el.style.left = x + "px";
+            el.style.top = y + "px";
+            el.innerHTML = `<span class="fav" style="background:${c}">${f}</span><span>${t}</span><span class="x">×</span>`;
+            [el, ...el.querySelectorAll("*")].forEach((n) => n.setAttribute("data-layout-allow-overlap", ""));
+            stage.appendChild(el);
+          });
+
+          const tl = gsap.timeline({ paused: true });
+          const n = document.querySelector($("#s07-n"));
+          const cnt = { v: 1 };
+          gsap.utils.toArray($(".s07-tab")).forEach((el, i) => {
+            const rot = tabs[i][5];
+            tl.fromTo(el, { z: -900, rotationY: rot * 3, rotationX: rot, opacity: 0 }, { z: 0, rotationY: rot, rotationX: rot / 3, opacity: 1, duration: 0.45, ease: "power3.out" }, 0.04 + i * 0.055);
+            tl.to(el, { y: (i % 2 ? -1 : 1) * 18, duration: 1.0, ease: "sine.inOut" }, 0.5);
+            // sucked into the centre
+            const cx = 960 - (tabs[i][3] + 160), cy = 540 - (tabs[i][4] + 30);
+            tl.to(el, { x: cx, y: cy, scale: 0, opacity: 0, rotation: rot * 6, duration: 0.3, ease: "power3.in" }, 1.55 + (i % 4) * 0.02);
+          });
+          tl.fromTo(cnt, { v: 1 }, { v: 14, duration: 0.8, ease: "power1.out", onUpdate: () => (n.textContent = Math.round(cnt.v)) }, 0.05);
+          tl.fromTo($("#s07-head"), { scale: 1.25, opacity: 0, filter: "blur(16px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.35, ease: "power3.out" }, 0.05);
+          tl.fromTo($("#s07-head"), { x: 0 }, { x: 0, scale: 1.04, duration: 1.2, ease: "sine.inOut" }, 0.4);
+          tl.fromTo($("#s07-comet"), { x: -700, y: 120, rotation: 20, opacity: 0 }, { x: 345, y: 534, rotation: 20, opacity: 1, duration: 0.25, ease: "power2.in" }, 1.38);
+          tl.to($("#s07-comet"), { opacity: 0, duration: 0.1 }, 1.63);
+          tl.to($("#s07-head"), { scale: 0, opacity: 0, duration: 0.25, ease: "power3.in" }, 1.6);
+          tl.fromTo($("#s07-flash"), { scale: 0 }, { scale: 52, duration: 0.32, ease: "power3.in" }, 1.68);
+          window.__timelines["s07"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

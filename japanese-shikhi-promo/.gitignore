@@ -1,0 +1,6 @@
+node_modules/
+snapshots/
+.hyperframes/
+# derived inputs for the reel (regenerate from renders/, see README)
+reel/assets/master.mp4
+reel/assets/master-audio.wav

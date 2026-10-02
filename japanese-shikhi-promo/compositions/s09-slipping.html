@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        [data-composition-id="s09"] .bgA { background: radial-gradient(ellipse at 50% 30%, #ffffff 0%, #fef2f3 55%, #fbd9dc 100%); }
+        [data-composition-id="s09"] .bgB { background: radial-gradient(ellipse at 50% 45%, #ffffff 0%, var(--cream) 62%, #f3ece4 100%); opacity: 0; }
+        [data-composition-id="s09"] .top { position: absolute; left: 0; right: 0; top: 120px; text-align: center; font-size: 60px; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; }
+        [data-composition-id="s09"] .top .serif { color: var(--red); font-size: 82px; font-weight: 400; letter-spacing: 0; margin: 0 6px; }
+        [data-composition-id="s09"] .rail { position: absolute; left: 520px; top: 330px; width: 880px; height: 8px; border-radius: 8px; background: var(--ink); }
+        [data-composition-id="s09"] .card { position: absolute; top: 338px; width: 200px; height: 230px; border-radius: 0 0 26px 26px; background: linear-gradient(180deg, #ef4a57, var(--red-deep)); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; transform-origin: 50% 0%; }
+        [data-composition-id="s09"] .card .kanji { font-size: 62px; }
+        [data-composition-id="s09"] .card small { font-size: 22px; font-weight: 600; opacity: 0.9; margin-top: 12px; font-family: var(--jp-sans); }
+        [data-composition-id="s09"] .drop { position: absolute; width: 34px; height: 44px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; background: var(--red); }
+        [data-composition-id="s09"] .puddle { position: absolute; left: 560px; top: 860px; width: 800px; height: 54px; border-radius: 50%; background: radial-gradient(ellipse at 50% 40%, #f0505c, #c92a37); }
+        [data-composition-id="s09"] .char { position: absolute; left: 1420px; top: 640px; width: 190px; height: 190px; }
+        [data-composition-id="s09"] .char .eyes { position: absolute; left: 44px; top: 50px; width: 110px; height: 50px; }
+        [data-composition-id="s09"] .char .eye { width: 36px; height: 44px; }
+        [data-composition-id="s09"] .char .eye::after { width: 16px; height: 20px; left: 6px; top: 14px; }
+        [data-composition-id="s09"] .char .eye:last-child { left: 64px; }
+        [data-composition-id="s09"] .taptap { position: absolute; left: 1120px; top: 520px; font-size: 52px; color: var(--muted); }
+        [data-composition-id="s09"] .ripple { position: absolute; left: 1350px; top: 570px; width: 330px; height: 330px; border-radius: 50%; border: 4px solid rgba(230, 57, 70, 0.4); }
+        [data-composition-id="s09"] .notif { position: absolute; left: 610px; top: 330px; width: 700px; padding: 26px 30px; border-radius: 28px; background: #fff; box-shadow: 0 30px 70px rgba(40, 20, 30, 0.16); display: flex; gap: 22px; align-items: center; }
+        [data-composition-id="s09"] .notif img { width: 76px; height: 76px; border-radius: 18px; }
+        [data-composition-id="s09"] .notif .t { font-size: 26px; font-weight: 800; color: var(--ink); }
+        [data-composition-id="s09"] .notif .t span { font-weight: 500; color: var(--muted); margin-left: 10px; font-size: 22px; }
+        [data-composition-id="s09"] .notif .b { font-size: 28px; font-weight: 500; color: #3f3a46; margin-top: 4px; }
+        [data-composition-id="s09"] .notif .b b { color: var(--red-deep); }
+        [data-composition-id="s09"] .bigbtn { position: absolute; left: 660px; top: 470px; width: 600px; height: 150px; border-radius: 40px; background: var(--red); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 56px; font-weight: 800; box-shadow: 0 30px 60px rgba(230, 57, 70, 0.35); }
+        [data-composition-id="s09"] .touch { position: absolute; left: 1080px; top: 520px; width: 90px; height: 90px; border-radius: 50%; background: rgba(22, 19, 32, 0.25); border: 4px solid rgba(255, 255, 255, 0.8); }
+        [data-composition-id="s09"] svg.check { position: absolute; left: 760px; top: 270px; width: 400px; height: 360px; overflow: visible; }
+        [data-composition-id="s09"] .done { position: absolute; left: 0; right: 0; top: 660px; text-align: center; font-size: 170px; color: var(--red); }
+        [data-composition-id="s09"] .hanko { left: 1150px; top: 250px; width: 170px; height: 170px; font-size: 96px; }
+      </style>
+
+      <div id="root" data-composition-id="s09" data-width="1920" data-height="1080" data-duration="5.4">
+        <div class="layer bgA"></div>
+        <div class="layer bgB" id="s09-bgB"></div>
+
+        <div class="top" id="s09-t1">When words start<span class="serif">slipping,</span></div>
+        <div class="top" id="s09-t2">it taps you on the shoulder.</div>
+        <div class="top" id="s09-t3">One tap.</div>
+
+        <div class="layer" id="s09-A">
+          <div class="rail"></div>
+          <div class="card s09-card" style="left: 600px"><div class="kanji">食べる</div><small>たべる</small></div>
+          <div class="card s09-card" style="left: 860px"><div class="kanji">学校</div><small>がっこう</small></div>
+          <div class="card s09-card" style="left: 1120px"><div class="kanji">先生</div><small>せんせい</small></div>
+          <div class="drop s09-drop" style="left: 683px; top: 560px"></div>
+          <div class="drop s09-drop" style="left: 943px; top: 560px"></div>
+          <div class="drop s09-drop" style="left: 1203px; top: 560px"></div>
+          <div class="puddle" id="s09-puddle"></div>
+        </div>
+
+        <div class="ball char" id="s09-char"><div class="eyes"><div class="eye"></div><div class="eye"></div></div></div>
+        <div class="ripple" id="s09-rip"></div>
+        <div class="taptap serif" id="s09-tap">tap tap</div>
+        <div class="notif" id="s09-notif">
+          <img src="assets/img/mark.png" alt="" />
+          <div>
+            <div class="t">Japanese Shikhi<span>now</span></div>
+            <div class="b"><b>12 words</b> are fading — review now</div>
+          </div>
+        </div>
+
+        <div class="bigbtn" id="s09-btn">Review now →</div>
+        <div class="touch" id="s09-touch"></div>
+
+        <svg class="check" viewBox="0 0 400 360" id="s09-checksvg"><path id="s09-check" d="M 40 190 L 150 300 L 370 50" fill="none" stroke="#e63946" stroke-width="54" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        <div class="hanko" id="s09-hanko">済</div>
+        <div class="done serif" id="s09-done">Reviewed.</div>
+      </div>
+
+      <script>
+        (function () {
+          gsap.registerPlugin(DrawSVGPlugin);
+          const S = '[data-composition-id="s09"] ';
+          const $ = (s) => S + s;
+          const tl = gsap.timeline({ paused: true });
+          tl.set([$("#s09-t2"), $("#s09-t3"), $("#s09-tap"), $("#s09-notif"), $("#s09-btn"), $("#s09-touch"), $("#s09-hanko"), $("#s09-done"), $("#s09-rip")], { opacity: 0 }, 0);
+          tl.set($("#s09-check"), { drawSVG: "0%" }, 0);
+
+          // A — words bleeding out of memory
+          tl.fromTo($("#s09-t1"), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.05);
+          tl.fromTo($(".rail"), { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power3.out" }, 0.05);
+          tl.fromTo($(".s09-card"), { scaleY: 0 }, { scaleY: 1, duration: 0.45, stagger: 0.08, ease: "back.out(1.6)" }, 0.2);
+          tl.to($(".s09-card"), { opacity: 0.45, scaleY: 0.82, duration: 1.4, stagger: 0.1, ease: "sine.in" }, 0.8);
+          gsap.utils.toArray($(".s09-drop")).forEach((el, i) => {
+            tl.fromTo(el, { y: -30, opacity: 0 }, { y: 280, opacity: 1, duration: 0.5, ease: "power2.in" }, 0.7 + i * 0.18);
+            tl.fromTo(el, { y: -30 }, { y: 280, duration: 0.5, ease: "power2.in" }, 1.35 + i * 0.15);
+          });
+          tl.fromTo($("#s09-puddle"), { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power2.out" }, 1.1);
+          tl.fromTo($("#s09-char"), { x: 600, rotation: 180 }, { x: 0, rotation: 0, duration: 0.55, ease: "power3.out" }, 1.35);
+
+          // B — it taps you on the shoulder
+          tl.to($("#s09-t1"), { opacity: 0, y: -20, duration: 0.25 }, 2.1);
+          tl.to($("#s09-A"), { opacity: 0, y: 40, duration: 0.3, ease: "power2.in" }, 2.1);
+          tl.to($("#s09-bgB"), { opacity: 1, duration: 0.3 }, 2.15);
+          tl.fromTo($("#s09-t2"), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 2.25);
+          tl.to($("#s09-char"), { x: -120, y: -40, duration: 0.3, ease: "power2.inOut" }, 2.2);
+          tl.to($("#s09-char"), { y: -80, duration: 0.12, yoyo: true, repeat: 3, ease: "power1.out" }, 2.45);
+          tl.fromTo($("#s09-tap"), { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.2 }, 2.45);
+          tl.fromTo($("#s09-rip"), { opacity: 0.9, scale: 0.4 }, { opacity: 0, scale: 1.2, duration: 0.5, ease: "power2.out" }, 2.45);
+          tl.fromTo($("#s09-notif"), { opacity: 0, y: -120, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(1.6)" }, 2.8);
+
+          // C — One tap.
+          tl.to([$("#s09-t2"), $("#s09-tap")], { opacity: 0, duration: 0.2 }, 3.5);
+          tl.to($("#s09-notif"), { y: -160, opacity: 0, duration: 0.3, ease: "power2.in" }, 3.5);
+          tl.to($("#s09-char"), { x: 400, opacity: 0, duration: 0.3, ease: "power2.in" }, 3.5);
+          tl.fromTo($("#s09-t3"), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 3.6);
+          tl.fromTo($("#s09-btn"), { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 3.62);
+          tl.fromTo($("#s09-touch"), { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power2.out" }, 3.85);
+          tl.to($("#s09-btn"), { scale: 0.93, duration: 0.08, yoyo: true, repeat: 1, ease: "power1.inOut" }, 3.95);
+
+          // D — Reviewed. (済 = done)
+          tl.to([$("#s09-btn"), $("#s09-touch"), $("#s09-t3")], { opacity: 0, scale: 0.9, duration: 0.2 }, 4.3);
+          tl.set($("#s09-checksvg"), { opacity: 1 }, 4.35);
+          tl.to($("#s09-check"), { drawSVG: "100%", duration: 0.35, ease: "power3.out" }, 4.4);
+          tl.fromTo($("#s09-done"), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 4.5);
+          tl.fromTo($("#s09-hanko"), { opacity: 0, scale: 2.2, rotation: -30 }, { opacity: 1, scale: 1, rotation: -10, duration: 0.2, ease: "power4.in" }, 4.7);
+          window.__timelines["s09"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

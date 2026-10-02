@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; overflow: hidden; }
+        [data-composition-id="s04"] .bg { background: radial-gradient(ellipse at 50% 40%, #ffffff 0%, var(--cream) 60%, #f3ece4 100%); }
+        [data-composition-id="s04"] svg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: visible; }
+        [data-composition-id="s04"] .arc text { font-family: var(--sans); font-size: 46px; font-weight: 600; fill: var(--ink); letter-spacing: 6px; }
+        [data-composition-id="s04"] .corner { position: absolute; left: 70px; top: 60px; width: 54px; height: 54px; }
+      </style>
+
+      <div id="root" data-composition-id="s04" data-width="1920" data-height="1080" data-duration="1.2">
+        <div class="layer bg"></div>
+        <div class="ball corner" id="s04-corner"></div>
+        <svg viewBox="0 0 1920 1080" id="s04-svg">
+          <defs>
+            <path id="s04-arc" d="M 600 600 A 380 380 0 0 1 1120 200" />
+            <radialGradient id="s04-g" cx="0.34" cy="0.28" r="0.75">
+              <stop offset="0" stop-color="#ff8a92" />
+              <stop offset="0.45" stop-color="#e63946" />
+              <stop offset="1" stop-color="#b81f2c" />
+            </radialGradient>
+          </defs>
+          <g class="arc"><text id="s04-text"><textPath id="s04-tp" href="#s04-arc" startOffset="0%">where'd the rest go?</textPath></text></g>
+          <path id="s04-q" d="M 860 410 C 860 300, 930 250, 1000 250 C 1080 250, 1140 300, 1140 380 C 1140 470, 1010 480, 1000 600 L 1000 680" fill="none" stroke="none" />
+          <g id="s04-dots"></g>
+        </svg>
+        <div class="ball" id="s04-dot" style="left: 962px; top: 760px; width: 78px; height: 78px"></div>
+      </div>
+
+      <script>
+        (function () {
+          const S = '[data-composition-id="s04"] ';
+          const NS = "http://www.w3.org/2000/svg";
+          const q = document.querySelector(S + "#s04-q");
+          const g = document.querySelector(S + "#s04-dots");
+          const len = q.getTotalLength();
+          const n = Math.floor(len / 58);
+          for (let i = 0; i <= n; i++) {
+            const p = q.getPointAtLength((i / n) * len);
+            const c = document.createElementNS(NS, "circle");
+            c.setAttribute("cx", p.x.toFixed(1));
+            c.setAttribute("cy", p.y.toFixed(1));
+            c.setAttribute("r", "27");
+            c.setAttribute("fill", "url(#s04-g)");
+            c.setAttribute("class", "s04-c");
+            g.appendChild(c);
+          }
+
+          const tl = gsap.timeline({ paused: true });
+          tl.fromTo(S + "#s04-corner", { scale: 0 }, { scale: 1, duration: 0.3, ease: "back.out(3)" }, 0);
+          tl.fromTo(S + ".s04-c", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.22, stagger: 0.022, ease: "back.out(3)" }, 0.02);
+          tl.fromTo(S + "#s04-dot", { y: -260, scale: 0.6, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.45, ease: "bounce.out" }, 0.38);
+          tl.fromTo(S + "#s04-text", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, 0.12);
+          tl.fromTo(S + "#s04-tp", { attr: { startOffset: "-45%" } }, { attr: { startOffset: "0%" }, duration: 0.6, ease: "power3.out" }, 0.12);
+          tl.to([S + "#s04-svg", S + "#s04-dot"], { scale: 0.92, opacity: 0, duration: 0.18, transformOrigin: "50% 50%", ease: "power2.in" }, 1.02);
+          window.__timelines["s04"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
